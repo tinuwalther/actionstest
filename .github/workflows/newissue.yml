@@ -1,5 +1,4 @@
 # This is a basic workflow to help you get started with Actions
-
 name: New issue
 
 # Controls when the workflow will run
@@ -20,7 +19,7 @@ jobs:
       - name: Check out feature branch
         run: |
           $branch_name = $( "${{ github.event.issue.title }}" ) -replace '\s', '_'
-          echo "Issue ${{ github.event.issue.title }} created on ${{ github.repository }}"
+          echo "Issue ${{ github.event.issue.title }} created on ${{ github.repository }} from ${{ github.event.issue.actor }}"
           git checkout -b $branch_name
           git push origin $branch_name
         shell: pwsh
