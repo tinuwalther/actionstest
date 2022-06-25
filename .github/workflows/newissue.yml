@@ -19,7 +19,7 @@ jobs:
           ref: main
       - name: Check out feature branch
         run: |
-          $branch_name = (${{ github.event.issue.title }} -replace '\s', '_').Substring(0,10)
+          $branch_name = $(${{ github.event.issue.title }} -replace '\s', '_').Substring(0,10)
           echo "Issue ${{ github.event.issue.title }} created on ${{ github.repository }}"
           git checkout -b $branch_name
           git push origin $branch_name
