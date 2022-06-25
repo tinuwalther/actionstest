@@ -10,9 +10,9 @@ on:
       - opened
 
 jobs:
-  New issue:
+  new_issue:
     runs-on: ubuntu-latest
     steps:
     # Runs a single command using the runners shell
     - name: Send greeting
-      run: echo "New issue opend on ${{ github.repository }}"
+      run: echo "New issue opend on ${{ github.event.issue.title }}"
