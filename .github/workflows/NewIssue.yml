@@ -1,13 +1,16 @@
+
+name: New issue
+
 on:
   issues:
-    types: [opened]
+  types: [opened]
 	
 jobs:
-	issue_created:
-		name: New issue created
-		runs-on: ubuntu-latest
-		steps:
-		  - run: |
-			  echo A comment on issue $NUMBER
-			env:
-			  NUMBER: ${{ github.event.issue.number }}
+  issue_created:
+  name: New issue created
+  runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo A comment on issue $NUMBER
+        env:
+          NUMBER: ${{ github.event.issue.number }}
