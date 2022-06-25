@@ -3,11 +3,12 @@ name: New issue
 
 on:
   issues:
-  types: [opened]
+    types: [opened]
 
 jobs:
   issue_created:
   name: New issue created
+  if: ${{ !github.event.issue.pull_request }}
   runs-on: ubuntu-latest
     steps:
       - run: |
