@@ -38,8 +38,6 @@ jobs:
 
       - name: Close Issue ${{ github.event.issue.number }} ${{ github.event.issue.title }}
         uses: peter-evans/close-issue@v2
-        run: $branch_name = $( "${{ github.event.issue.title }}" ) -replace '\s', '_'
-        shell: pwsh
         with:
           issue-number: ${{ github.event.issue.number }}
-          comment: Auto-closing issue, branch $branch_name created successfully
+          comment: Auto-closing issue, branch ${{ github.event.issue.title }} created successfully
