@@ -21,5 +21,13 @@ jobs:
           $branch_name = $( "${{ github.event.issue.title }}" ) -replace '\s', '_'
           echo "Issue ${{ github.event.issue.title }} created on ${{ github.repository }} from ${{ github.event.issue.actor }}"
           git checkout -b $branch_name
+          cd Nodes
+          Add-Content -Path example.yml "- Name: host2345"
+          Add-Content -Path example.yml "  IPAddress: 192.168.254.10"
+          Add-Content -Path example.yml "  Subnet: 255.255.255.0"
+          Add-Content -Path example.yml "  Gateway: 192.168.254.1"
+          Add-Content -Path example.yml "  Status: new"
+          git add .
+          git commit -m "Add example.yml"
           git push origin $branch_name
         shell: pwsh
