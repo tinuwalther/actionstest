@@ -4,9 +4,9 @@ GitHub Actions Testrepository.
 
 ## Structure
 
-- bin
-- nodes
-- tests
+- Bin
+- Nodes
+- Tests
 - whatever
 
 # Issues
