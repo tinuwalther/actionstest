@@ -13,7 +13,7 @@ GitHub Actions Testrepository.
 
 Every new issue create a new branch
 
-![Opened issue](https://github.com/tinuwalther/actionstest/actions/workflows/newissue.yml/badge.svg?event=opened)
+![Opened issue](https://github.com/tinuwalther/actionstest/actions/workflows/newissue.yml/badge.svg?event=open)
 
 ## Merge
 
