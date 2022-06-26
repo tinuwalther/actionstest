@@ -13,10 +13,10 @@ jobs:
   new_issue:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Check out feature branch
+        uses: actions/checkout@v3
         with:
           ref: main
-      - name: Check out feature branch
         run: |
           $branch_name = $( "${{ github.event.issue.title }}" ) -replace '\s', '_'
           echo "Issue ${{ github.event.issue.title }} created on ${{ github.repository }} from ${{ github.event.issue.actor }}"
@@ -33,8 +33,9 @@ jobs:
           git commit -m "Add example.yml"
           git push origin $branch_name
         shell: pwsh
+
       - name: Close Issue
         uses: peter-evans/close-issue@v2
         with:
           issue-number: ${{ github.event.issue.number }}
-          comment: Auto-closing issue
+          comment: Auto-closing issue, branch $branch_name created successfully
