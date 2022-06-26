@@ -15,7 +15,7 @@ Every new issue create a new branch
 
 ![Opened issue](https://github.com/tinuwalther/actionstest/actions/workflows/newissue.yml/badge.svg?event=opened)
 
-[![GitHub issues]([https://img.shields.io/github/issues-raw/actionstest/siplasplas.svg?maxAge=2592000)]()
+![GitHub issues]([https://img.shields.io/github/issues-raw/actionstest/siplasplas.svg?maxAge=2592000)]()
 
 ## Node
 
