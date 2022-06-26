@@ -21,6 +21,8 @@ jobs:
           $branch_name = $( "${{ github.event.issue.title }}" ) -replace '\s', '_'
           echo "Issue ${{ github.event.issue.title }} created on ${{ github.repository }} from ${{ github.event.issue.actor }}"
           git checkout -b $branch_name
+          git config --global user.email "it@martin-walther.ch"
+          git config --global user.name "Martin Walther"
           cd Nodes
           Add-Content -Path example.yml "- Name: host2345"
           Add-Content -Path example.yml "  IPAddress: 192.168.254.10"
