@@ -13,7 +13,8 @@ jobs:
   new_issue:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Clone repo ${{ github.repository }}
+        uses: actions/checkout@v3
         with:
           ref: main
 
