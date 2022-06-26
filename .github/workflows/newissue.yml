@@ -32,5 +32,9 @@ jobs:
           git add .
           git commit -m "Add example.yml"
           git push origin $branch_name
-          gh issue comment ${{ github.event.issue.id }} --body "Autoclosed by GitHub CLI"
         shell: pwsh
+      - name: Close Issue
+        uses: peter-evans/close-issue@v2
+        with:
+          issue-number: ${{ github.event.issue.id }}
+          comment: Auto-closing issue
