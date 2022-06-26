@@ -1,5 +1,5 @@
 Name: host1234
-IPAddress: 192.168.254.10
-Subnet: 255.255.255.0
-Gateway: 192.168.254.1
-Status: done
+  IPAddress: 192.168.254.10
+  Subnet: 255.255.255.0
+  Gateway: 192.168.254.1
+  Status: done
