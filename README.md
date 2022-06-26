@@ -13,16 +13,22 @@ GitHub Actions Testrepository.
 
 Every new issue create a new branch
 
-![Opened issue](https://github.com/tinuwalther/actionstest/actions/workflows/newissue.yml/badge.svg?event=push)
+![GitHub issues](https://img.shields.io/github/issues-raw/tinuwalther/actionstest)
 
-## Node
+## Branch
 
+Every new branch contains an example.yml
+
+````markdown
 - Name: host2345
   IPAddress: 192.168.254.10
   Subnet: 255.255.255.0
   Gateway: 192.168.254.1
   Status: new
+ ````
 
 ## Merge
 
 Every merge request... 
+
+![GitHub last commit (branch)](https://img.shields.io/github/last-commit/tinuwalther/actionstest/main)
