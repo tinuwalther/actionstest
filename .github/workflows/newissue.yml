@@ -21,7 +21,7 @@ jobs:
       - name: Check out feature branch
         run: |
           $branch_name = $( "${{ github.event.issue.title }}" ) -replace '\s', '_'
-          echo "Issue ${{ github.event.issue.title }} created on ${{ github.repository }} from ${{ github.event.issue.actor }}"
+          echo "Issue ${{ github.event.issue.title }} created on ${{ github.repository }}"
           git checkout -b $branch_name
           git config --global user.email "it@martin-walther.ch"
           git config --global user.name "Martin Walther"
@@ -36,8 +36,10 @@ jobs:
           git push origin $branch_name
         shell: pwsh
 
-      - name: Close Issue ${{ github.event.issue.number }}
+      - name: Close Issue ${{ github.event.issue.number }} ${{ github.event.issue.title }}
         uses: peter-evans/close-issue@v2
+        run: $branch_name = $( "${{ github.event.issue.title }}" ) -replace '\s', '_'
+        shell: pwsh
         with:
           issue-number: ${{ github.event.issue.number }}
           comment: Auto-closing issue, branch $branch_name created successfully
