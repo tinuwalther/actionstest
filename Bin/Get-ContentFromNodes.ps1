@@ -1,3 +1,5 @@
+#Requires –Modules psyml
+
 #region Folders
 $RootFolder = $PSScriptRoot | Split-Path -Parent
 $BinFolder  = Join-Path -Path $RootFolder -ChildPath 'Bin'

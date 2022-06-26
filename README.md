@@ -1,6 +1,6 @@
 # GitHub Actions test
 
-GitHub Actions Testrepository. 
+GitHub Actions Testrepository.
 
 ## Structure
 
@@ -9,12 +9,12 @@ GitHub Actions Testrepository.
 - Tests
 - whatever
 
-# Issues
+## Issues
 
 Every new issue create a new branch
 
 ![Opened issue](https://github.com/tinuwalther/actionstest/actions/workflows/newissue.yml/badge.svg?event=opened)
 
-# Merge
+## Merge
 
 Every merge request... 
