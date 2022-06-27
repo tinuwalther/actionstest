@@ -32,3 +32,6 @@ jobs:
           Install-Module -Name psyml -force
           Invoke-Pester YamlSyntax.Tests.ps1 -output detailed
         shell: pwsh
+
+      - name: Make my day sunny
+        run: echo "Bruce Springsteen - Waitin' On A Sunny Day https://www.youtube.com/watch?v=TiCxqhu9cio"
