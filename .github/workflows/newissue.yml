@@ -21,7 +21,9 @@ jobs:
       - name: Check out feature branch
         run: |
           $branch_name = $( "${{ github.event.issue.title }}" ) -replace '\s', '_'
-          echo "Issue ${{ github.event.issue.title }} created on ${{ github.repository }}"
+          Write-Host "Issue ${{ github.event.issue.title }} created on ${{ github.repository }}"
+          Write-Host "Description ${{ github.event.issue.description }}"
+          Write-Host "Body ${{ github.event.issue.body }}"
           git checkout -b $branch_name
           git config --global user.email "it@martin-walther.ch"
           git config --global user.name "Martin Walther"
