@@ -26,21 +26,9 @@ jobs:
         with:
           ref: ${{ github.event.inputs.name }}
 
-      - name: Check out feature branch
+      - name: Invoke Pester Tests
         run: |
-          git config --global user.email "it@martin-walther.ch"
-          git config --global user.name "Martin Walther"
           cd Tests
           Install-Module -Name psyml -force
           Invoke-Pester YamlSyntax.Tests.ps1 -output detailed
         shell: pwsh
-  # This workflow contains a single job called "greet"
-  # greet:
-    # The type of runner that the job will run on
-  #   runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
-  #   steps:
-    # Runs a single command using the runners shell
-  #   - name: Send greeting
-  #     run: echo "Hello ${{ github.event.inputs.name }}"
