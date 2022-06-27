@@ -1,8 +1,4 @@
-name: New Host
+name: NewHost
+title: NewHost
 description:
-body: |
-- Name: host1234
-  IPAddress: 192.168.254.10
-  Subnet: 255.255.255.0
-  Gateway: 192.168.254.1
-  Status: new
+body: [Name, IPAddress, Subnet, Gateway, Status]
