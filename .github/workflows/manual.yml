@@ -28,7 +28,6 @@ jobs:
 
       - name: Check out feature branch
         run: |
-          git checkout -b $branch_name
           git config --global user.email "it@martin-walther.ch"
           git config --global user.name "Martin Walther"
           cd Tests
