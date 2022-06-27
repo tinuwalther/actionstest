@@ -32,6 +32,7 @@ jobs:
           git config --global user.email "it@martin-walther.ch"
           git config --global user.name "Martin Walther"
           cd Tests
+          Install-Module -Name psyml -force
           Invoke-Pester YamlSyntax.Tests.ps1 -output detailed
         shell: pwsh
   # This workflow contains a single job called "greet"
