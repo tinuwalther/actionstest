@@ -28,14 +28,14 @@ jobs:
           git config --global user.email "it@martin-walther.ch"
           git config --global user.name "Martin Walther"
           cd Nodes
-          Add-Content -Path $($branch_name).yml "- Name: host2345"
-          Add-Content -Path $($branch_name).yml "  IPAddress: 192.168.254.10"
-          Add-Content -Path $($branch_name).yml "  Subnet: 255.255.255.0"
-          Add-Content -Path $($branch_name).yml "  Gateway: 192.168.254.1"
-          Add-Content -Path $($branch_name).yml "  Status: new"
-          Add-Content -Path $($branch_name).yml "${{ github.event.issue.body }}"
+          Add-Content -Path example.yml "- Name: host2345"
+          Add-Content -Path example.yml "  IPAddress: 192.168.254.10"
+          Add-Content -Path example.yml "  Subnet: 255.255.255.0"
+          Add-Content -Path example.yml "  Gateway: 192.168.254.1"
+          Add-Content -Path example.yml "  Status: new"
+          Add-Content -Path example.yml "${{ github.event.issue.body }}"
           git add .
-          git commit -m "Add $($branch_name).yml"
+          git commit -m "Add example.yml"
           git push origin $branch_name
         shell: pwsh
 
