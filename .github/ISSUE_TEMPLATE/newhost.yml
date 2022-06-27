@@ -1,4 +1,0 @@
-name: NewHost
-title: NewHost
-description:
-body: [Name, IPAddress, Subnet, Gateway, Status]
