@@ -30,6 +30,6 @@ Every new feature branch contains an example.yml. The name of the issue is also 
 
 ## Merge
 
-Every merge request, should do some magic things... 
+Every merge request runs Pester-Tests and should do some other magic things... 
 
 ![GitHub last commit (branch)](https://img.shields.io/github/last-commit/tinuwalther/actionstest/main)
