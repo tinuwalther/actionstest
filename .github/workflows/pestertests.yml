@@ -16,11 +16,13 @@ jobs:
   trigger_pester:
     runs-on: ubuntu-latest
     steps:
+      # Clone repo
       - name: Clone repo ${{ github.event.pull_request.head.sha }}
         uses: actions/checkout@v3
         with:
           ref: ${{ github.event.pull_request.head.sha }}
 
+      # Run Pester Tests
       - name: Invoke Pester Tests
         run: |
           cd Tests
