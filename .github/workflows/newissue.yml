@@ -30,7 +30,7 @@ jobs:
       - name: Add new file to feature branch
         run: |
           $branch_name = $( "${{ github.event.issue.title }}" ) -replace '\s', '_'
-          $body = $( "${{ github.event.issue.body }}" ) -replace '`n', ' '
+          $body = $( "${{ github.event.issue.body }}" ) -replace "`r`n", ' '
           Write-Host "Issue ${{ github.event.issue.title }} created on ${{ github.repository }}"
           Write-Host $body
           cd Nodes
