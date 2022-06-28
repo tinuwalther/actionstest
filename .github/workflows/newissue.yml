@@ -41,18 +41,17 @@ jobs:
           Add-Content -Path $ExampleYaml "  Gateway: 192.168.254.1"
           Add-Content -Path $ExampleYaml "  Status: new"
           Add-Content -Path $ExampleYaml "${{ github.event.issue.body }}"
-        shell: pwsh
-
-      - name: Push feature branch
-        run: |
-          $branch_name = $( "${{ github.event.issue.title }}" ) -replace '\s', '_'
-          $ExampleYaml = "$($branch_name).yml"
           git add .
           if(Test-Path $ExampleYaml){
             git commit -m "Update $ExampleYaml"
           }else{
             git commit -m "Add $ExampleYaml"
           }
+        shell: pwsh
+
+      - name: Push feature branch
+        run: |
+          $branch_name = $( "${{ github.event.issue.title }}" ) -replace '\s', '_'
           git push origin $branch_name
         shell: pwsh
 
