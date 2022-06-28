@@ -35,6 +35,11 @@ jobs:
           Write-Host "${{ github.event.issue.body }}"
           cd Nodes
           $ExampleYaml = "$($branch_name).yml"
+          if(Test-Path $ExampleYaml){
+            $CommitMessage = "Update $ExampleYaml"
+          }else{
+            $CommitMessage = "Add $ExampleYaml"
+          }
           Add-Content -Path $ExampleYaml "- Name: $($branch_name)"
           Add-Content -Path $ExampleYaml "  IPAddress: 192.168.254.10"
           Add-Content -Path $ExampleYaml "  Subnet: 255.255.255.0"
@@ -42,11 +47,7 @@ jobs:
           Add-Content -Path $ExampleYaml "  Status: new"
           Add-Content -Path $ExampleYaml "${{ github.event.issue.body }}"
           git add .
-          if(Test-Path $ExampleYaml){
-            git commit -m "Update $ExampleYaml"
-          }else{
-            git commit -m "Add $ExampleYaml"
-          }
+          git commit -m $CommitMessage
         shell: pwsh
 
       - name: Push feature branch
