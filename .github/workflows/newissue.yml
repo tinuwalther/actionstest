@@ -18,7 +18,7 @@ jobs:
         with:
           ref: main
 
-      - name: Check out feature branch
+      - name: Check out feature branch for issue ${{ github.event.issue.title }}
         run: |
           $branch_name = $( "${{ github.event.issue.title }}" ) -replace '\s', '_'
           Write-Host "Issue ${{ github.event.issue.title }} created on ${{ github.repository }}"
