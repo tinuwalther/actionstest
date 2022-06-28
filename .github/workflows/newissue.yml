@@ -27,7 +27,7 @@ jobs:
           git config --global user.name "Martin Walther"
         shell: pwsh
 
-      - name: Add new file on feature branch
+      - name: Add new file to feature branch
         run: |
           $branch_name = $( "${{ github.event.issue.title }}" ) -replace '\s', '_'
           Write-Host "Issue ${{ github.event.issue.title }} created on ${{ github.repository }}"
@@ -45,6 +45,8 @@ jobs:
 
       - name: Push feature branch
         run: |
+          $branch_name = $( "${{ github.event.issue.title }}" ) -replace '\s', '_'
+          $ExampleYaml = "$($branch_name).yml"
           git add .
           if(Test-Path $ExampleYaml){
             git commit -m "Update $ExampleYaml"
