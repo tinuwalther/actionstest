@@ -27,6 +27,7 @@ Every new feature branch contains an example.yml. The name of the issue is also 
   Gateway: 192.168.254.1
   Status: new
  ````
+
 All Properties
 
 ````markdown
