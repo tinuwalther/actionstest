@@ -28,7 +28,7 @@ jobs:
           git config --global user.email "it@martin-walther.ch"
           git config --global user.name "Martin Walther"
           cd Nodes
-          Add-Content -Path example.yml "- Name: host2345"
+          Add-Content -Path example.yml "- Name: $($branch_name)"
           Add-Content -Path example.yml "  IPAddress: 192.168.254.10"
           Add-Content -Path example.yml "  Subnet: 255.255.255.0"
           Add-Content -Path example.yml "  Gateway: 192.168.254.1"
