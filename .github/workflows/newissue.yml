@@ -40,12 +40,12 @@ jobs:
           }else{
             $CommitMessage = "Add $ExampleYaml"
           }
+          Add-Content -Path $ExampleYaml "# $($body)"
           Add-Content -Path $ExampleYaml "- Name: $($branch_name)"
           Add-Content -Path $ExampleYaml "  IPAddress: 192.x.y.z"
           Add-Content -Path $ExampleYaml "  Subnet: 255.255.255.0"
           Add-Content -Path $ExampleYaml "  Gateway: 192.x.y.1"
           Add-Content -Path $ExampleYaml "  Status: new"
-          Add-Content -Path $ExampleYaml "# ($body)"
           git add .
           git commit -m $CommitMessage
         shell: pwsh
