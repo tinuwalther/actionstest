@@ -27,6 +27,29 @@ Every new feature branch contains an example.yml. The name of the issue is also 
   Gateway: 192.168.254.1
   Status: new
  ````
+All Properties
+
+````markdown
+- ESXiHost           : 
+  IPv4Address        : 
+  SubnetMask         : 
+  DefaultGateway     : 
+  vMotionIPv4Address : 
+  vMotionSubnetMask  : 
+  PrimaryDNSServer   : 
+  SecondaryDNSServer : 
+  DnsServerName      : 
+  DhcpServerName     : 
+  DnsZoneName        : 
+  DhcpScopeId        : 
+  MacAddress         : 
+  DhcpDescription    : 
+  ClusterName        : 
+  Synergy            : 
+  HostProfile        : 
+  FinishHostProfile  : 
+  Status             : 
+ ````
 
 ## Merge
 
