@@ -22,7 +22,6 @@ jobs:
         run: |
           $branch_name = $( "${{ github.event.issue.title }}" ) -replace '\s', '_'
           Write-Host "Issue ${{ github.event.issue.title }} created on ${{ github.repository }}"
-          Write-Host "Body:"
           git checkout -b $branch_name
           git config --global user.email "it@martin-walther.ch"
           git config --global user.name "Martin Walther"
@@ -42,6 +41,10 @@ jobs:
           Add-Content -Path $ExampleYaml "  Gateway: 192.168.254.1"
           Add-Content -Path $ExampleYaml "  Status: new"
           Add-Content -Path $ExampleYaml "${{ github.event.issue.body }}"
+        shell: pwsh
+
+      - name: Push feature branch
+        run: |
           git add .
           if(Test-Path $ExampleYaml){
             git commit -m "Update $ExampleYaml"
