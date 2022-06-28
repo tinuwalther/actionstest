@@ -1,13 +1,14 @@
-# GitHub Actions test
+# GitHub Actions
 
 GitHub Actions Testrepository.
 
 ## Structure
 
-- Bin
-- Nodes
-- Tests
-- whatever
+- .github (Workflows)
+- Bin (PowerShell-Scripts)
+- Nodes (Node.yml)
+- Tests (Pester-Tests)
+- whatever (Your turn)
 
 ## Issues
 
@@ -29,6 +30,6 @@ Every new feature branch contains an example.yml. The name of the issue is also 
 
 ## Merge
 
-Every merge request, shoul do some magic things... 
+Every merge request, should do some magic things... 
 
 ![GitHub last commit (branch)](https://img.shields.io/github/last-commit/tinuwalther/actionstest/main)
