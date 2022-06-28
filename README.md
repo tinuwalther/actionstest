@@ -21,11 +21,11 @@ Every new issue create a new feature branch. The name of the issue is also the n
 Every new feature branch contains an example.yml. The name of the issue is also the name of the new YAML-file and the value of the field Name inside the YAML-file. After the feature branch is pushed to the repository, the issue will closed by the GitHub Action.
 
 ````markdown
-- Name: host2345
+- Name:      host2345
   IPAddress: 192.168.254.10
-  Subnet: 255.255.255.0
-  Gateway: 192.168.254.1
-  Status: new
+  Subnet:    255.255.255.0
+  Gateway:   192.168.254.1
+  Status:    new
  ````
 
 All Properties
