@@ -23,10 +23,17 @@ jobs:
           $branch_name = $( "${{ github.event.issue.title }}" ) -replace '\s', '_'
           Write-Host "Issue ${{ github.event.issue.title }} created on ${{ github.repository }}"
           Write-Host "Body:"
-          Write-Host "${{ github.event.issue.body }}"
           git checkout -b $branch_name
           git config --global user.email "it@martin-walther.ch"
           git config --global user.name "Martin Walther"
+        shell: pwsh
+
+      - name: Add new file on feature branch
+        run: |
+          $branch_name = $( "${{ github.event.issue.title }}" ) -replace '\s', '_'
+          Write-Host "Issue ${{ github.event.issue.title }} created on ${{ github.repository }}"
+          Write-Host "Body:"
+          Write-Host "${{ github.event.issue.body }}"
           cd Nodes
           $ExampleYaml = "$($branch_name).yml"
           Add-Content -Path $ExampleYaml "- Name: $($branch_name)"
@@ -36,7 +43,11 @@ jobs:
           Add-Content -Path $ExampleYaml "  Status: new"
           Add-Content -Path $ExampleYaml "${{ github.event.issue.body }}"
           git add .
-          git commit -m "Add $ExampleYaml"
+          if(Test-Path $ExampleYaml){
+            git commit -m "Update $ExampleYaml"
+          }else{
+            git commit -m "Add $ExampleYaml"
+          }
           git push origin $branch_name
         shell: pwsh
 
