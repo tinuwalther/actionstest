@@ -29,8 +29,8 @@ jobs:
 
       - name: Add new file to feature branch
         run: |
-          $branch_name  = $( "${{ github.event.issue.title }}" ) -replace '\s', '_'
-          $body_content = $( "${{ github.event.issue.body }}" ) -replace "`r`n", ' '
+          $branch_name   = $( "${{ github.event.issue.title }}" ) -replace '\s', '_'
+          $body_content  = $( "${{ github.event.issue.body }}" ) -replace "`r`n", ' '
           $CommitMessage = ./Bin/New-BranchContent.ps1 -BranchName $branch_name -BodyContent $body_content -verbose
           git add .
           git commit -m $CommitMessage
