@@ -28,4 +28,5 @@ jobs:
           cd Tests
           Install-Module -Name psyml -force
           Invoke-Pester YamlSyntax.Tests.ps1 -output detailed
+          Invoke-Pester InputValidation.Tests.ps1 -output detailed
         shell: pwsh
