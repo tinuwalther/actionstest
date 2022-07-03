@@ -12,6 +12,10 @@ on:
 jobs:
   new_issue:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: pwsh
+
     steps:
       - name: Clone repo ${{ github.repository }}
         uses: actions/checkout@v3
@@ -25,7 +29,6 @@ jobs:
           git checkout -b $branch_name
           git config --global user.email "it@martin-walther.ch"
           git config --global user.name "Martin Walther"
-        shell: pwsh
 
       - name: Add new file to feature branch
         run: |
@@ -34,13 +37,11 @@ jobs:
           $CommitMessage = ./Bin/New-BranchContent.ps1 -BranchName $branch_name -BodyContent $body_content -verbose
           git add .
           git commit -m $CommitMessage
-        shell: pwsh
 
       - name: Push feature branch
         run: |
           $branch_name = $( "${{ github.event.issue.title }}" ) -replace '\s', '_'
           git push origin $branch_name
-        shell: pwsh
 
       - name: Close Issue ${{ github.event.issue.number }} ${{ github.event.issue.title }}
         uses: peter-evans/close-issue@v2
