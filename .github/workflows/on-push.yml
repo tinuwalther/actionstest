@@ -15,8 +15,10 @@ jobs:
         shell: pwsh
         
     steps:
-      - name: Test with Pester
+      - name: Checkout branch ${{ github.event.pull_request.head.sha }}
         uses: actions/checkout@v3
+
+      - name: Test with Pester
         run: |
           cd Tests
           Install-Module -Name psyml -force
@@ -26,6 +28,7 @@ jobs:
           $config.Output.Verbosity = 'Detailed'
           $config.Run.PassThru = $true
           Invoke-Pester -Configuration $config | Export-CliXml -Path Unit.Tests.xml -Force
+
       - name: Upload test results
         uses: actions/upload-artifact@v3
         with:
