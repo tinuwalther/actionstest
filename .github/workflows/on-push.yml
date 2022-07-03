@@ -34,5 +34,5 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: ubuntu-Unit-Tests
-          path: Unit.Tests.xml
+          path: Tests/Unit.Tests.xml
     if: ${{ always() }}
