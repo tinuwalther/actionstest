@@ -1,5 +1,4 @@
-# This is a basic workflow to help you get started with Actions
-name: Push request -> run Pester and upload results
+name: Upload artifact from Ubuntu
 
 # Controls when the workflow will run
 on: [push]
