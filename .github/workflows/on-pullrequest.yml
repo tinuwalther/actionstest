@@ -26,6 +26,14 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
 
+      # Do magic things and commit
+      - name: Do Magic things
+        run: Write-Host "Autocommit ${{ github.event.pull_request.head }}"
+
+      # Push feature branch
+      - name: Push feature branch
+        run: Write-Host "Autopush ${{ github.event.pull_request.head }}"
+
       # Run Pester Tests
       - name: Invoke Pester Tests
         run: |
@@ -36,3 +44,11 @@ jobs:
           $config.Filter.Tag = "Required"
           $config.Output.Verbosity = 'Detailed'
           Invoke-Pester -Configuration $config
+
+      # Merge in to main branch
+      - name: Merge in to main branch
+        run: Write-Host "Automerge  ${{ github.event.pull_request.head }}"
+
+      # Delete feature branch
+      - name: Delete feature branch
+        run: Write-Host "Autodelete ${{ github.event.pull_request.head }}"
