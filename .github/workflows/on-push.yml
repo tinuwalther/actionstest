@@ -17,7 +17,7 @@ jobs:
         
     steps:
       - name: Test with Pester
-      - uses: actions/checkout@v3
+        uses: actions/checkout@v3
         run: |
           cd Tests
           Install-Module -Name psyml -force
