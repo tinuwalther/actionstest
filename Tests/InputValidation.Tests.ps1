@@ -4,7 +4,7 @@ BeforeDiscovery {
     $yamlobject = get-content $yamlfile | ConvertFrom-Yaml
 }
 
-Describe "Validate Input" {
+Describe "Validate Input" -Tag 'Required' {
     
     Context "Validate Input of field Name: <Filed>" -ForEach @{ Filed = $($yamlobject.Name) } {
         It "[POS] The Name should contains characters and numbers" {
