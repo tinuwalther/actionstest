@@ -1,6 +1,6 @@
-﻿Describe "Test for duplicated values" -Tag 'Test' {
+﻿Describe "Test for duplicated values" -Tag 'Required' {
 
-    BeforeDiscovery {
+    BeforeAll {
         $RootFolder = $PSScriptRoot | Split-Path -Parent
         $BinFolder  = Join-Path -Path $RootFolder -ChildPath 'Bin'
         $NodeFolder = Join-Path -Path $RootFolder -ChildPath 'Nodes'
