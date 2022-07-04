@@ -308,7 +308,10 @@ function New-PesterReport{
 
     end{
         Write-Verbose "[End]     $function"
-        $Path = Join-Path -Path $($PSScriptRoot).Replace('Bin','Reports') -ChildPath ("$($BaseInputFile).html")
+        #$Path = Join-Path -Path $($PSScriptRoot).Replace('Bin','Reports') -ChildPath ("$($BaseInputFile).html")
+        $RootFolder    = $PSScriptRoot | Split-Path -Parent
+        $ReportsFolder = Join-Path -Path $RootFolder -ChildPath 'Reports'
+        $Path = Join-Path -Path $ReportsFolder -ChildPath ("$($BaseInputFile).html")
         $Html | Out-File -FilePath $Path -Encoding utf8 -Force
     }
 }
