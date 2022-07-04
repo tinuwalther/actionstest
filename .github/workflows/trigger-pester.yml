@@ -75,10 +75,10 @@ jobs:
           Add-Content -Path $ReadmeFullName -Value "-|-"
           Add-Content -Path $ReadmeFullName -Value "Total|$($result.TotalCount)"
           Add-Content -Path $ReadmeFullName -Value "Passed|$($result.PassedCount)"
-          Add-Content -Path $ReadmeFullName -Value "Failed|($result.FailedCount)"
-          Add-Content -Path $ReadmeFullName -Value "Error|($result.ErrorCount)"
-          Add-Content -Path $ReadmeFullName -Value "Skipped|($result.SkippedCount)"
-          Add-Content -Path $ReadmeFullName -Value "NotRun|($result.NotRunCount)"
+          Add-Content -Path $ReadmeFullName -Value "Failed|$($result.FailedCount)"
+          Add-Content -Path $ReadmeFullName -Value "Error|$($result.ErrorCount)"
+          Add-Content -Path $ReadmeFullName -Value "Skipped|$($result.SkippedCount)"
+          Add-Content -Path $ReadmeFullName -Value "NotRun|$($result.NotRunCount)"
 
       - name: Upload Pester Result
         run: |
