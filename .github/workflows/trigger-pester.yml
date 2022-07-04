@@ -1,4 +1,4 @@
-name: Push request -> run Pester Tests and upload results
+name: Trigger Pester Tests -> run Pester Tests and upload results
 
 # Controls when the workflow will run
 on: 
@@ -56,20 +56,14 @@ jobs:
           git commit -m "Upload Last-TestsReport.NUnitXml"
           git push
 
-      - name: Push feature branch
-        run: Write-Host "Autopush ${{ github.head_ref }}"
-
       - name: Dump GitHub context
         id: github_context_step
         run: echo '${{ toJSON(github) }}'
+
       - name: Dump job context
         run: echo '${{ toJSON(job) }}'
+
       - name: Dump steps context
         run: echo '${{ toJSON(steps) }}'
 
-    #  - name: Upload test results
-    #    uses: actions/upload-artifact@v3
-    #    with:
-    #      name: ubuntu-Unit-Tests
-    #      path: Tests/Unit.Tests.xml
     #if: ${{ always() }}

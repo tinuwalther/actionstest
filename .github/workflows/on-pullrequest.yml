@@ -43,7 +43,21 @@ jobs:
           $config = [PesterConfiguration]::Default
           $config.Filter.Tag = "Required"
           $config.Output.Verbosity = 'Detailed'
-          Invoke-Pester -Configuration $config
+          $config.Run.PassThru = $true
+          $NUnitReport = Invoke-Pester -Configuration $config
+
+          $ParentLocation = Get-Location | Select -ExpandProperty Path | Get-Item | Select -ExpandProperty Parent
+          $ReportsPath    = Join-Path -Path $ParentLocation.FullName -ChildPath 'Reports'
+          if(-not(Test-Path $ReportsPath)){
+            $null = New-Item -Path $ReportsPath -ItemType Directory
+          }
+          cd $ReportsPath
+          $NUnitReport | Export-NUnitReport -Path Last-TestsReport.NUnitXml
+          git config --global user.email "it@martin-walther.ch"
+          git config --global user.name "Martin Walther"
+          git add .
+          git commit -m "Upload Last-TestsReport.NUnitXml"
+          git push
 
       # Merge in to main branch
       - name: Merge in to main branch
