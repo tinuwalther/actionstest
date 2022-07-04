@@ -2,11 +2,22 @@
 
 GitHub Actions Testrepository.
 
+## Usage
+
+1. Create a new issue with the name of an computer.  
+A GitHub Action creates a new feature branch with en example Yaml-file.  
+
+2. Edit the Yaml-file and create a Pull request with the name of the feature branch.  
+The Pull request trigger a GitHub Action that run Pester Tests and upload the result as Last-TestsReport.csv and Last-TestsReport.NUnitXml.
+
+3. Merge the Pull Request manually. Later, this should be done with a GitHub Action too.
+
 ## Structure
 
 - .github (Workflows)
 - Bin (PowerShell-Scripts)
 - Nodes (Node.yml)
+- Reports (Pester Reports)
 - Tests (Pester-Tests)
 - whatever (Your turn)
 
