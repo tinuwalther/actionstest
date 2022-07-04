@@ -1,14 +1,6 @@
 # GitHub Actions
 
-GitHub Actions Testrepository.
-
-## Structure
-
-- .github (Workflows)
-- Bin (PowerShell-Scripts)
-- Nodes (Node.yml)
-- Reports (Pester Reports)
-- Tests (Pester-Tests)
+GitHub Actions Testrepository :boom:
 
 ## Usage
 
@@ -20,7 +12,7 @@ A GitHub Action creates a new feature branch with en example Yaml-file.
 
 ### 2. Edit the Yaml-file
 
-Edit the Yaml-file and create a Pull request with the name of the feature branch. After the feature branch is pushed to the repository, the issue will closed by the GitHub Action.
+Edit the Yaml-file, add more Yaml-files and create a Pull request with the name of the feature branch. After the feature branch is pushed to the repository, the issue will closed by the GitHub Action.
 
 ````markdown
 - Name:      host2345
@@ -44,6 +36,6 @@ Merge the Pull Request manually. Later, this should be done with a GitHub Action
 
 Fore more information, see Reports/Last-TestsReport.csv
 
-Last run|result|Total|Passed|Failed|Error|Skipped|NotRun
+Last run|Result|Total|Passed|Failed|Error|Skipped|NotRun
 -|-|-|-|-|-|-|-
 2022-07-04 11:44:23|Success|7|6|0|0|0|1
