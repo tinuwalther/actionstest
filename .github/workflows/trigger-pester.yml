@@ -61,7 +61,7 @@ jobs:
           $NUnitReport | Export-NUnitReport -Path $ReportFullName #Last-TestsReport.NUnitXml
           
           Write-Host "Create CSV-Report"
-          $result = ./$($BinPath)/Read-FromXML.ps1 -Inputfile $ReportFullName
+          $result = . $($BinPath)/Read-FromXML.ps1 -Inputfile $ReportFullName
           $result.Tests | ConvertTo-Csv | Out-File -FilePath $($ReportFullName -replace '.NUnitXml', '.csv') -Encoding utf8 -NoClobber -Force
 
           Write-Host "Update README.md"
