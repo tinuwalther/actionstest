@@ -47,22 +47,28 @@ jobs:
           Write-Host "Run Pester Tests"
           cd Tests
           $config = [PesterConfiguration]::Default
-          $config.Filter.Tag       = "Required"
-          $config.Output.Verbosity = 'Detailed'
-          $config.Run.PassThru     = $true
+          $config.Filter.Tag         = "Required"
+          $config.Output.Verbosity   = 'Normal'
+          $config.Run.PassThru       = $true
           $NUnitReport = Invoke-Pester -Configuration $config
 
           Write-Host "Create Last-TestsReport.NUnitXml"
           if(-not(Test-Path $ReportsPath)){
             $null = New-Item -Path $ReportsPath -ItemType Directory
           }
-          #cd $ReportsPath
           $NUnitReport | Export-NUnitReport -Path $ReportFullName #Last-TestsReport.NUnitXml
           
           Write-Host "Create CSV-Report"
           cd $BinPath
-          $result = ./Read-FromXML.ps1 -Inputfile $ReportFullName -Verbose
+          $result = ./Read-FromXML.ps1 -Inputfile $ReportFullName
           $result.Tests | ConvertTo-Csv | Out-File -FilePath $($ReportFullName -replace '.NUnitXml', '.csv') -Encoding utf8 -NoClobber
+
+          cd ..
+          Add-Content -Path README.md -Value "`n## Last Pester-run"
+          Add-Content -Path README.md -Value "`n$($result.ExecutedAt) ended with $($result.Result)"
+          Add-Content -Path README.md -Value "- TotalCount:  $($result.TotalCount)"
+          Add-Content -Path README.md -Value "- PassedCount: $($result.PassedCount)"
+          Add-Content -Path README.md -Value "- FailedCount: $($result.FailedCount)"
 
       - name: Upload Pester Result
         run: |
