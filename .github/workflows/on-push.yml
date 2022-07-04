@@ -42,7 +42,13 @@ jobs:
           $config.Output.Verbosity = 'Detailed'
           $config.Run.PassThru = $true
           $NUnitReport = Invoke-Pester -Configuration $config
-          cd ../Reports
+
+          $ParentLocation = Get-Location | Select -ExpandProperty Path | Get-Item | Select -ExpandProperty Parent
+          $ReportsPath    = Join-Path -Path $ParentLocation.FullName -ChildPath 'Reports'
+          if(-not(Test-Path $ReportsPath)){
+            $null = New-Item -Path $ReportsPath -ItemType Directory
+          }
+          cd $ReportsPath
           $NUnitReport | Export-NUnitReport -Path Last-TestsReport.NUnitXml
           git config --global user.email "it@martin-walther.ch"
           git config --global user.name "Martin Walther"
