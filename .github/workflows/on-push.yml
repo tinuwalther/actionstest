@@ -2,13 +2,22 @@ name: Push request -> run Pester Tests and upload results
 
 # Controls when the workflow will run
 on: 
-  push:
-    branches-ignore:
-    - 'main'
+#  push:
+#    branches-ignore:
+#    - 'main'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
-    
+    # Inputs the workflow accepts.
+    inputs:
+      name:
+        # Friendly description to be shown in the UI instead of 'name'
+        description: 'branch name to checkout'
+        # Default value if no value is explicitly provided
+        default: 'main'
+        # Input has to be provided for the workflow to run
+        required: true
+
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   trigger_pester:
@@ -18,8 +27,10 @@ jobs:
         shell: pwsh
         
     steps:
-      - name: Checkout branch ${{ github.event.pull_request.head.sha }}
+      - name: Clone repo ${{ github.event.inputs.name }}
         uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.inputs.name }}
 
       - name: Test with Pester
         run: |
@@ -30,11 +41,17 @@ jobs:
           $config.Filter.Tag = "Required"
           $config.Output.Verbosity = 'Detailed'
           $config.Run.PassThru = $true
-          Invoke-Pester -Configuration $config | Export-CliXml -Path Unit.Tests.xml -Force
+          Invoke-Pester -Configuration $config | Export-NUnitReport -Path ../Reports/Last-TestsReport.NUnitXml -Force
+          git config --global user.email "it@martin-walther.ch"
+          git config --global user.name "Martin Walther"
+          git add .
+          git commit -m "Upload Last-TestsReport.NUnitXml"
+          git push
 
-      - name: Upload test results
-        uses: actions/upload-artifact@v3
-        with:
-          name: ubuntu-Unit-Tests
-          path: Tests/Unit.Tests.xml
-    if: ${{ always() }}
+
+    #  - name: Upload test results
+    #    uses: actions/upload-artifact@v3
+    #    with:
+    #      name: ubuntu-Unit-Tests
+    #      path: Tests/Unit.Tests.xml
+    #if: ${{ always() }}
