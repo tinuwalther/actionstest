@@ -85,6 +85,8 @@ jobs:
 
       - name: Upload changes
         run: |
+          git config --global user.email "it@martin-walther.ch"
+          git config --global user.name "Martin Walther"
           $CommitMessage = "Upload Last-TestsReport"
           git add .
           git commit -m $CommitMessage
