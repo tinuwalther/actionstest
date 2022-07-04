@@ -22,14 +22,15 @@ jobs:
     steps:
       # Clone repo
       - name: Clone repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           ref: ${{ github.event.pull_request.head.sha }}
 
       # Do magic things and commit
-      - name: Do Magic things
+      - name: Do Magic things ${{ github.event.pull_request.title }}
         run: |
-          git checkout ${{ github.event.pull_request.head.sha }}
+          git checkout ${{ github.event.pull_request.title }}
+          git branch
           $currentbranch = git branch --show-current
           Write-Host "Current branch is $currentbranch"
 
