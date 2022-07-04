@@ -74,15 +74,10 @@ jobs:
 
           Write-Host "Update README.md"
           Add-Content -Path $ReadmeFullName -Value "`n## Last Pester-run"
-          Add-Content -Path $ReadmeFullName -Value "`nLast run from $($result.ExecutedAt) finished with result $($result.Result). Fore more information, see Reports/Last-TestsReport.csv"
-          Add-Content -Path $ReadmeFullName -Value "Result|Count"
-          Add-Content -Path $ReadmeFullName -Value "-|-"
-          Add-Content -Path $ReadmeFullName -Value "Total|$($result.TotalCount)"
-          Add-Content -Path $ReadmeFullName -Value "Passed|$($result.PassedCount)"
-          Add-Content -Path $ReadmeFullName -Value "Failed|$($result.FailedCount)"
-          Add-Content -Path $ReadmeFullName -Value "Error|$($result.ErrorCount)"
-          Add-Content -Path $ReadmeFullName -Value "Skipped|$($result.SkippedCount)"
-          Add-Content -Path $ReadmeFullName -Value "NotRun|$($result.NotRunCount)"
+          #Add-Content -Path $ReadmeFullName -Value "`nLast run from $($result.ExecutedAt) finished with result $($result.Result). Fore more information, see Reports/Last-TestsReport.csv"
+          #Add-Content -Path $ReadmeFullName -Value "`nLast run|Result|Total|Passed|Failed|Error|Skipped|NotRun"
+          #Add-Content -Path $ReadmeFullName -Value "-|-|-|-|-|-|-|-"
+          Add-Content -Path $ReadmeFullName -Value $($result.ExecutedAt)|$($result.Result)|$($result.TotalCount)|$($result.PassedCount)|$($result.FailedCount)|$($result.ErrorCount)|$($result.SkippedCount)|$($result.NotRunCount)"
 
       - name: Upload changes
         run: |

@@ -2,16 +2,6 @@
 
 GitHub Actions Testrepository.
 
-## Usage
-
-1. Create a new issue with the name of an computer.  
-A GitHub Action creates a new feature branch with en example Yaml-file.  
-
-2. Edit the Yaml-file and create a Pull request with the name of the feature branch.  
-The Pull request trigger a GitHub Action that run Pester Tests and upload the result as Last-TestsReport.csv and Last-TestsReport.NUnitXml.
-
-3. Merge the Pull Request manually. Later, this should be done with a GitHub Action too.
-
 ## Structure
 
 - .github (Workflows)
@@ -19,17 +9,18 @@ The Pull request trigger a GitHub Action that run Pester Tests and upload the re
 - Nodes (Node.yml)
 - Reports (Pester Reports)
 - Tests (Pester-Tests)
-- whatever (Your turn)
 
-## Issues
+## Usage
 
-Every new issue create a new feature branch. The name of the issue is also the name of the feature branch.
+### 1. Create a new issue with the name of a computer
+
+A GitHub Action creates a new feature branch with en example Yaml-file. 
 
 ![GitHub issues](https://img.shields.io/github/issues-raw/tinuwalther/actionstest)
 
-## Branch
+### 2. Edit the Yaml-file
 
-Every new feature branch contains an example.yml. The name of the issue is also the name of the new YAML-file and the value of the field Name inside the YAML-file. After the feature branch is pushed to the repository, the issue will closed by the GitHub Action.
+Edit the Yaml-file and create a Pull request with the name of the feature branch. After the feature branch is pushed to the repository, the issue will closed by the GitHub Action.
 
 ````markdown
 - Name:      host2345
@@ -39,44 +30,20 @@ Every new feature branch contains an example.yml. The name of the issue is also 
   Status:    new
  ````
 
-All Properties
+### 3. Create a Pull request
 
-````markdown
-- ESXiHost           : 
-  IPv4Address        : 
-  SubnetMask         : 
-  DefaultGateway     : 
-  vMotionIPv4Address : 
-  vMotionSubnetMask  : 
-  PrimaryDNSServer   : 
-  SecondaryDNSServer : 
-  DnsServerName      : 
-  DhcpServerName     : 
-  DnsZoneName        : 
-  DhcpScopeId        : 
-  MacAddress         : 
-  DhcpDescription    : 
-  ClusterName        : 
-  Synergy            : 
-  HostProfile        : 
-  FinishHostProfile  : 
-  Status             : 
- ````
+The Pull request trigger a GitHub Action that run Pester Tests and upload the result as Last-TestsReport.csv and Last-TestsReport.NUnitXml.
 
-## Merge
+### 4. Merge the Pull Request
 
-Every merge request runs Pester-Tests and should do some other magic things... 
+Merge the Pull Request manually. Later, this should be done with a GitHub Action too.
 
 ![GitHub last commit (branch)](https://img.shields.io/github/last-commit/tinuwalther/actionstest/main)
 
 ## Last Pester-run
 
-Last run from 2022-07-04 11:44:23 finished with result Success. Fore more information, see Reports/Last-TestsReport.csv
-Result|Count
--|-
-Total|7
-Passed|6
-Failed|0
-Error|0
-Skipped|0
-NotRun|1
+Fore more information, see Reports/Last-TestsReport.csv
+
+Last run|result|Total|Passed|Failed|Error|Skipped|NotRun
+-|-|-|-|-|-|-|-
+2022-07-04 11:44:23|Success|7|6|0|0|0|1
