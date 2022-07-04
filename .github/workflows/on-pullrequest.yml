@@ -87,10 +87,11 @@ jobs:
         run: |
           git config --global user.email "it@martin-walther.ch"
           git config --global user.name "Martin Walther"
+          $currentbranch = git branch --show-current
           $CommitMessage = "Upload Last-TestsReport"
           git add .
           git commit -m $CommitMessage
-          git push origin ${{ github.event.pull_request.head.sha }}
+          git push origin $currentbranch
 
       # Merge in to main branch
       - name: Merge in to main branch ${{ github.event.pull_request.head.sha }}
