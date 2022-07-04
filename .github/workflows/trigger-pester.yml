@@ -65,7 +65,7 @@ jobs:
       - name: Dump GitHub context
         id: github_context_step
         run: echo '${{ toJSON(github) }}'
-      if: ${{ always() }}
+      #if: ${{ always() }}
 
       - name: Dump job context
         run: echo '${{ toJSON(job) }}'
