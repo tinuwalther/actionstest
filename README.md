@@ -57,3 +57,15 @@ All Properties
 Every merge request runs Pester-Tests and should do some other magic things... 
 
 ![GitHub last commit (branch)](https://img.shields.io/github/last-commit/tinuwalther/actionstest/main)
+
+## Last Pester-run
+
+Last run from 2022-07-04 11:44:23 finished with result Success. Fore more information, see Reports/Last-TestsReport.csv
+Result|Count
+-|-
+Total|7
+Passed|6
+Failed|0
+Error|0
+Skipped|0
+NotRun|1
