@@ -1,4 +1,4 @@
-﻿Describe "Test for duplicated values" -Tag 'Required' {
+﻿Describe "Test for duplicated values" -Tag 'Test' {
 
     BeforeAll {
         $RootFolder = $PSScriptRoot | Split-Path -Parent
