@@ -28,11 +28,11 @@ jobs:
 
       # Do magic things and commit
       - name: Do Magic things
-        run: Write-Host "Autocommit ${{ github.event.pull_request.head }}"
+        run: Write-Host "Autocommit ${{ github.event.pull_request }}"
 
       # Push feature branch
       - name: Push feature branch
-        run: Write-Host "Autopush ${{ github.event.pull_request.head }}"
+        run: Write-Host "Autopush ${{ github.event.pull_request }}"
 
       # Run Pester Tests
       - name: Invoke Pester Tests
@@ -85,17 +85,15 @@ jobs:
 
       - name: Upload changes
         run: |
-          $branch_name   = $( "${{ github.event.issue.title }}" ) -replace '\s', '_'
-          $body_content  = $( "${{ github.event.issue.body }}" ) -replace "`r`n", ' '
-          $CommitMessage = ./Bin/New-BranchContent.ps1 -BranchName $branch_name -BodyContent $body_content -verbose
+          $CommitMessage = "Upload Last-TestsReport"
           git add .
           git commit -m $CommitMessage
-          git push origin $branch_name
+          git push
 
       # Merge in to main branch
       - name: Merge in to main branch
-        run: Write-Host "Automerge  ${{ github.event.pull_request.head }}"
+        run: Write-Host "Automerge  ${{ github.event.pull_request }}"
 
       # Delete feature branch
       - name: Delete feature branch
-        run: Write-Host "Autodelete ${{ github.event.pull_request.head }}"
+        run: Write-Host "Autodelete ${{ github.event.pull_request }}"
