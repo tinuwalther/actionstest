@@ -58,7 +58,8 @@ jobs:
           Write-Host "Create PSHTML-Report"
           $BinPath = Join-Path -Path $ParentLocation -ChildPath 'Bin'
           cd $BinPath
-          ./Read-FromXML.ps1 -Inputfile (Join-Path -Path $ReportsPath -ChildPath 'Last-TestsReport.NUnitXml')
+          $result = ./Read-FromXML.ps1 -Inputfile $(Join-Path -Path $(ReportsPath -ChildPath 'Last-TestsReport.NUnitXml') -Verbose
+          $result.Tests | ConvertTo-Csv | Out-File -FilePath $(ReportsPath -ChildPath 'Last-TestsReport.csv') -Encoding utf8 -NoClobber
 
       - name: Upload Pester Result
         run: |
