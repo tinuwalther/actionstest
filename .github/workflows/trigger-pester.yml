@@ -41,12 +41,14 @@ jobs:
           Write-Host "Initialize path-variable"
           $ParentLocation = Get-Location | Select -ExpandProperty Path
           $ReportsPath    = Join-Path -Path $ParentLocation -ChildPath 'Reports'
+          $TestsPath      = Join-Path -Path $ParentLocation -ChildPath 'Tests'
           $BinPath        = Join-Path -Path $ParentLocation -ChildPath 'Bin'
           $ReportFullName = Join-Path -Path $ReportsPath -ChildPath 'Last-TestsReport.NUnitXml'
+          $ReadmeFullName = Join-Path -Path $ParentLocation -ChildPath 'README.md'
 
           Write-Host "Run Pester Tests"
-          cd Tests
           $config = [PesterConfiguration]::Default
+          $config.Run.Path           = $TestsPath
           $config.Filter.Tag         = "Required"
           $config.Output.Verbosity   = 'Normal'
           $config.Run.PassThru       = $true
@@ -59,23 +61,30 @@ jobs:
           $NUnitReport | Export-NUnitReport -Path $ReportFullName #Last-TestsReport.NUnitXml
           
           Write-Host "Create CSV-Report"
-          cd $BinPath
-          $result = ./Read-FromXML.ps1 -Inputfile $ReportFullName
+          $result = ./$BinPath/Read-FromXML.ps1 -Inputfile $ReportFullName
           $result.Tests | ConvertTo-Csv | Out-File -FilePath $($ReportFullName -replace '.NUnitXml', '.csv') -Encoding utf8 -NoClobber -Force
 
-          cd ..
-          Add-Content -Path README.md -Value "`n## Last Pester-run"
-          Add-Content -Path README.md -Value "`n$($result.ExecutedAt) ended with $($result.Result)"
-          Add-Content -Path README.md -Value "- TotalCount:  $($result.TotalCount)"
-          Add-Content -Path README.md -Value "- PassedCount: $($result.PassedCount)"
-          Add-Content -Path README.md -Value "- FailedCount: $($result.FailedCount)"
+          Write-Host "Update README.md"
+          Add-Content -Path $ReadmeFullName -Value "`n## Last Pester-run"
+          Add-Content -Path $ReadmeFullName -Value "`nLast run from $($result.ExecutedAt) finished with result $($result.Result)."
+          Add-Content -Path $ReadmeFullName -Value "Result|Count"
+          Add-Content -Path $ReadmeFullName -Value "-|-"
+          Add-Content -Path $ReadmeFullName -Value "Total|$($result.TotalCount)"
+          Add-Content -Path $ReadmeFullName -Value "Passed|$($result.PassedCount)"
+          Add-Content -Path $ReadmeFullName -Value "Failed|($result.FailedCount)"
+          Add-Content -Path $ReadmeFullName -Value "Skipped|($result.FailedCount)"
+          Add-Content -Path $ReadmeFullName -Value "NotRun|($result.FailedCount)"
 
       - name: Upload Pester Result
         run: |
           git config --global user.email "it@martin-walther.ch"
           git config --global user.name "Martin Walther"
-          git add .
+          git add Last-TestsReport.NUnitXml
           git commit -m "Upload Last-TestsReport.NUnitXml"
+          git add Last-TestsReport.csv
+          git commit -m "Upload Last-TestsReport.csv"
+          git add README.md
+          git commit -m "Update README.md"
           git push
 
       - name: Dump GitHub context
