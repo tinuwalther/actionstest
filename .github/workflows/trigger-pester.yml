@@ -43,8 +43,9 @@ jobs:
           $ReportsPath    = Join-Path -Path $ParentLocation -ChildPath 'Reports'
           $TestsPath      = Join-Path -Path $ParentLocation -ChildPath 'Tests'
           $BinPath        = Join-Path -Path $ParentLocation -ChildPath 'Bin'
-          $ReportFullName = Join-Path -Path $ReportsPath -ChildPath 'Last-TestsReport.NUnitXml'
           $ReadmeFullName = Join-Path -Path $ParentLocation -ChildPath 'README.md'
+          $ReportFullName = Join-Path -Path $ReportsPath -ChildPath 'Last-TestsReport.NUnitXml'
+          $CsvFullName    = $($ReportFullName -replace '.NUnitXml', '.csv')
 
           Write-Host "Run Pester Tests"
           $config = [PesterConfiguration]::Default
@@ -61,6 +62,9 @@ jobs:
           $NUnitReport | Export-NUnitReport -Path $ReportFullName #Last-TestsReport.NUnitXml
           
           Write-Host "Create CSV-Report"
+          if(Test-Path $CsvFullName){
+            $null = Remove-Item -Path $CsvFullName -Force
+          }
           $result = . "$($BinPath)/Read-FromXML.ps1" -Inputfile $ReportFullName
           $result.Tests | ConvertTo-Csv | Out-File -FilePath $($ReportFullName -replace '.NUnitXml', '.csv') -Encoding utf8 -NoClobber -Force
 
