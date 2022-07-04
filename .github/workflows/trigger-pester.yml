@@ -58,8 +58,8 @@ jobs:
           Write-Host "Create CSV-Report"
           $BinPath = Join-Path -Path $ParentLocation -ChildPath 'Bin'
           cd $BinPath
-          $result = ./Read-FromXML.ps1 -Inputfile $(Join-Path -Path $(ReportsPath -ChildPath 'Last-TestsReport.NUnitXml') -Verbose
-          $result.Tests | ConvertTo-Csv | Out-File -FilePath $(ReportsPath -ChildPath 'Last-TestsReport.csv') -Encoding utf8 -NoClobber
+          $result = ./Read-FromXML.ps1 -Inputfile $(Join-Path -Path $($ReportsPath -ChildPath 'Last-TestsReport.NUnitXml') -Verbose
+          $result.Tests | ConvertTo-Csv | Out-File -FilePath $($ReportsPath -ChildPath 'Last-TestsReport.csv') -Encoding utf8 -NoClobber
 
       - name: Upload Pester Result
         run: |
@@ -72,10 +72,10 @@ jobs:
       - name: Dump GitHub context
         id: github_context_step
         run: echo '${{ toJSON(github) }}'
-      #if: ${{ always() }}
 
       - name: Dump job context
         run: echo '${{ toJSON(job) }}'
 
       - name: Dump steps context
         run: echo '${{ toJSON(steps) }}'
+    if: ${{ always() }}
