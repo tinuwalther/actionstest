@@ -27,15 +27,15 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha }}
 
       # Do magic things and commit
-      - name: Do Magic things
-        run: Write-Host "Autocommit ${{ github.event.pull_request }}"
+      - name: Do Magic things ${{ github.event.pull_request.head.sha }}
+        run: Write-Host "Autocommit ${{ github.event.pull_request.head.sha }}"
 
       # Push feature branch
-      - name: Push feature branch
-        run: Write-Host "Autopush ${{ github.event.pull_request }}"
+      - name: Push feature branch ${{ github.event.pull_request.head.sha }}
+        run: Write-Host "Autopush ${{ github.event.pull_request.head.sha }}"
 
       # Run Pester Tests
-      - name: Invoke Pester Tests
+      - name: Invoke Pester Tests ${{ github.event.pull_request.head.sha }}
         run: |
           Write-Host "Install and import Modules"
           Install-Module -Name psyml -force
@@ -83,19 +83,19 @@ jobs:
           Add-Content -Path $ReadmeFullName -Value "Skipped|$($result.SkippedCount)"
           Add-Content -Path $ReadmeFullName -Value "NotRun|$($result.NotRunCount)"
 
-      - name: Upload changes
+      - name: Upload changes ${{ github.event.pull_request.head.sha }}
         run: |
           git config --global user.email "it@martin-walther.ch"
           git config --global user.name "Martin Walther"
           $CommitMessage = "Upload Last-TestsReport"
           git add .
           git commit -m $CommitMessage
-          git push
+          git push origin ${{ github.event.pull_request.head.sha }}
 
       # Merge in to main branch
-      - name: Merge in to main branch
+      - name: Merge in to main branch ${{ github.event.pull_request.head.sha }}
         run: Write-Host "Automerge  ${{ github.event.pull_request }}"
 
       # Delete feature branch
-      - name: Delete feature branch
+      - name: Delete feature branch ${{ github.event.pull_request.head.sha }}
         run: Write-Host "Autodelete ${{ github.event.pull_request }}"
