@@ -41,7 +41,10 @@ jobs:
           $config.Filter.Tag = "Required"
           $config.Output.Verbosity = 'Detailed'
           $config.Run.PassThru = $true
-          Invoke-Pester -Configuration $config | Export-NUnitReport -Path Last-TestsReport.NUnitXml
+          $ReportDir = New-Item -Path ../Reports -ItemType Directory
+          $NUnitReport = Invoke-Pester -Configuration $config
+          cd $ReportDir.FullName
+          $NUnitReport | Export-NUnitReport -Path Last-TestsReport.NUnitXml
           git config --global user.email "it@martin-walther.ch"
           git config --global user.name "Martin Walther"
           git add .
