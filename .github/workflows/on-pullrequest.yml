@@ -27,9 +27,9 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha }}
 
       # Do magic things and commit
-      - name: Do Magic things ${{ github.event.pull_request.title }}
+      - name: Checkout branch ${{ github.event.pull_request.title }}
         run: |
-          git checkout ${{ github.event.pull_request.title }}
+          git checkout -b ${{ github.event.pull_request.title }}
           git branch
           $currentbranch = git branch --show-current
           Write-Host "Current branch is $currentbranch"
