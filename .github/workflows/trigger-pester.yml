@@ -34,9 +34,9 @@ jobs:
 
       - name: Test with Pester
         run: |
-          $CurrentLocation = Get-Location
+          $ParentLocation = Get-Location
           cd Tests
-          Get-Location | Select -ExpandProperty Path
+          Write-Host "Tests: $(Get-Location | Select -ExpandProperty Path)"
           Install-Module -Name psyml, pshtml -force
           Import-Module -Name Pester -MinimumVersion 5.3.3
           $config = [PesterConfiguration]::Default
@@ -45,18 +45,19 @@ jobs:
           $config.Run.PassThru = $true
           $NUnitReport = Invoke-Pester -Configuration $config
 
-          $ParentLocation = Get-Location | Select -ExpandProperty Path | Get-Item | Select -ExpandProperty Parent
-          $ReportsPath    = Join-Path -Path $ParentLocation.FullName -ChildPath 'Reports'
+          $ReportsPath = Join-Path -Path $ParentLocation.FullName -ChildPath 'Reports'
           Write-Host $ReportsPath
           if(-not(Test-Path $ReportsPath)){
             $null = New-Item -Path $ReportsPath -ItemType Directory
           }
           cd $ReportsPath
-          Get-Location | Select -ExpandProperty Path
+          Write-Host "Reports: $(Get-Location | Select -ExpandProperty Path)"
           $NUnitReport | Export-NUnitReport -Path Last-TestsReport.NUnitXml
-          cd $CurrentLocation
-          Get-Location | Select -ExpandProperty Path
-          ./Bin/New-PesterReport.ps1
+          
+          $BinPath = Join-Path -Path $ParentLocation.FullName -ChildPath 'Bin'
+          cd $BinPath
+          Write-Host "Root: $(Get-Location | Select -ExpandProperty Path)"
+          ./New-PesterReport.ps1
 
       - name: Upload Pester Result
         run: |
