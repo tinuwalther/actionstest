@@ -55,7 +55,7 @@ jobs:
           cd $ReportsPath
           $NUnitReport | Export-NUnitReport -Path Last-TestsReport.NUnitXml
           
-          Write-Host "Create PSHTML-Report"
+          Write-Host "Create CSV-Report"
           $BinPath = Join-Path -Path $ParentLocation -ChildPath 'Bin'
           cd $BinPath
           $result = ./Read-FromXML.ps1 -Inputfile $(Join-Path -Path $(ReportsPath -ChildPath 'Last-TestsReport.NUnitXml') -Verbose
