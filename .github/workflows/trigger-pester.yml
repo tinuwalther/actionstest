@@ -35,31 +35,34 @@ jobs:
       - name: Test with Pester
         run: |
           Write-Host "Install and import Modules"
-          $ParentLocation = Get-Location | Select -ExpandProperty Path
-          Install-Module -Name psyml, pshtml -force
+          Install-Module -Name psyml -force
           Import-Module -Name Pester -MinimumVersion 5.3.3
-          
+
+          Write-Host "Initialize path-variable"
+          $ParentLocation = Get-Location | Select -ExpandProperty Path
+          $ReportsPath    = Join-Path -Path $ParentLocation -ChildPath 'Reports'
+          $BinPath        = Join-Path -Path $ParentLocation -ChildPath 'Bin'
+          $ReportFullName = Join-Path -Path $ReportsPath -ChildPath 'Last-TestsReport.NUnitXml'
+
           Write-Host "Run Pester Tests"
           cd Tests
           $config = [PesterConfiguration]::Default
-          $config.Filter.Tag = "Required"
+          $config.Filter.Tag       = "Required"
           $config.Output.Verbosity = 'Detailed'
-          $config.Run.PassThru = $true
+          $config.Run.PassThru     = $true
           $NUnitReport = Invoke-Pester -Configuration $config
 
           Write-Host "Create Last-TestsReport.NUnitXml"
-          $ReportsPath = Join-Path -Path $ParentLocation -ChildPath 'Reports'
           if(-not(Test-Path $ReportsPath)){
             $null = New-Item -Path $ReportsPath -ItemType Directory
           }
-          cd $ReportsPath
-          $NUnitReport | Export-NUnitReport -Path Last-TestsReport.NUnitXml
+          #cd $ReportsPath
+          $NUnitReport | Export-NUnitReport -Path $ReportFullName #Last-TestsReport.NUnitXml
           
           Write-Host "Create CSV-Report"
-          $BinPath = Join-Path -Path $ParentLocation -ChildPath 'Bin'
           cd $BinPath
-          $result = ./Read-FromXML.ps1 -Inputfile $(Join-Path -Path $($ReportsPath -ChildPath 'Last-TestsReport.NUnitXml') -Verbose
-          $result.Tests | ConvertTo-Csv | Out-File -FilePath $($ReportsPath -ChildPath 'Last-TestsReport.csv') -Encoding utf8 -NoClobber
+          $result = ./Read-FromXML.ps1 -Inputfile $ReportFullName -Verbose
+          $result.Tests | ConvertTo-Csv | Out-File -FilePath $($ReportFullName -replace '.NUnitXml', '.csv') -Encoding utf8 -NoClobber
 
       - name: Upload Pester Result
         run: |
