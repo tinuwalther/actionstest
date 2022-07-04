@@ -1,6 +1,6 @@
 # GitHub Actions
 
-GitHub Actions Testrepository :boom:
+:boom: GitHub Actions Testrepository :boom:
 
 ## Usage
 

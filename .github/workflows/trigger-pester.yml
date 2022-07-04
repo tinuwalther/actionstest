@@ -69,7 +69,7 @@ jobs:
           $result.Tests | ConvertTo-Csv | Out-File -FilePath $($ReportFullName -replace '.NUnitXml', '.csv') -Encoding utf8 -NoClobber -Force
 
           Write-Host "Update README.md"
-          Add-Content -Path $ReadmeFullName -Value "`n## Last Pester-run"
+          #Add-Content -Path $ReadmeFullName -Value "`n## Last Pester-run"
           #Add-Content -Path $ReadmeFullName -Value "`nLast run from $($result.ExecutedAt) finished with result $($result.Result). Fore more information, see Reports/Last-TestsReport.csv"
           #Add-Content -Path $ReadmeFullName -Value "`nLast run|Result|Total|Passed|Failed|Error|Skipped|NotRun"
           #Add-Content -Path $ReadmeFullName -Value "-|-|-|-|-|-|-|-"
