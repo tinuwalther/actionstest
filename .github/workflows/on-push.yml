@@ -57,7 +57,7 @@ jobs:
           git push
 
       - name: Push feature branch
-        run: Write-Host "Autopush ${{ github.event.pull_request.head }}"
+        run: Write-Host "Autopush ${{ github.head_ref }}"
 
       - name: Dump GitHub context
         id: github_context_step
@@ -66,7 +66,7 @@ jobs:
         run: echo '${{ toJSON(job) }}'
       - name: Dump steps context
         run: echo '${{ toJSON(steps) }}'
-        
+
     #  - name: Upload test results
     #    uses: actions/upload-artifact@v3
     #    with:
