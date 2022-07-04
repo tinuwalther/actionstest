@@ -70,7 +70,7 @@ jobs:
 
           Write-Host "Update README.md"
           Add-Content -Path $ReadmeFullName -Value "`n## Last Pester-run"
-          Add-Content -Path $ReadmeFullName -Value "`nLast run from $($result.ExecutedAt) finished with result $($result.Result)."
+          Add-Content -Path $ReadmeFullName -Value "`nLast run from $($result.ExecutedAt) finished with result $($result.Result). Fore more information, see Reports/Last-TestsReport.csv"
           Add-Content -Path $ReadmeFullName -Value "Result|Count"
           Add-Content -Path $ReadmeFullName -Value "-|-"
           Add-Content -Path $ReadmeFullName -Value "Total|$($result.TotalCount)"

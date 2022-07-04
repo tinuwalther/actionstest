@@ -37,27 +37,60 @@ jobs:
       # Run Pester Tests
       - name: Invoke Pester Tests
         run: |
-          cd Tests
+          Write-Host "Install and import Modules"
           Install-Module -Name psyml -force
           Import-Module -Name Pester -MinimumVersion 5.3.3
+
+          Write-Host "Initialize path-variable"
+          $ParentLocation = Get-Location | Select -ExpandProperty Path
+          $ReportsPath    = Join-Path -Path $ParentLocation -ChildPath 'Reports'
+          $TestsPath      = Join-Path -Path $ParentLocation -ChildPath 'Tests'
+          $BinPath        = Join-Path -Path $ParentLocation -ChildPath 'Bin'
+          $ReadmeFullName = Join-Path -Path $ParentLocation -ChildPath 'README.md'
+          $ReportFullName = Join-Path -Path $ReportsPath -ChildPath 'Last-TestsReport.NUnitXml'
+          $CsvFullName    = $($ReportFullName -replace '.NUnitXml', '.csv')
+
+          Write-Host "Run Pester Tests"
           $config = [PesterConfiguration]::Default
-          $config.Filter.Tag = "Required"
-          $config.Output.Verbosity = 'Detailed'
-          $config.Run.PassThru = $true
+          $config.Run.Path           = $TestsPath
+          $config.Filter.Tag         = "Required"
+          $config.Output.Verbosity   = 'Normal'
+          $config.Run.PassThru       = $true
           $NUnitReport = Invoke-Pester -Configuration $config
 
-          $ParentLocation = Get-Location | Select -ExpandProperty Path | Get-Item | Select -ExpandProperty Parent
-          $ReportsPath    = Join-Path -Path $ParentLocation.FullName -ChildPath 'Reports'
+          Write-Host "Create Last-TestsReport.NUnitXml"
           if(-not(Test-Path $ReportsPath)){
             $null = New-Item -Path $ReportsPath -ItemType Directory
           }
-          cd $ReportsPath
-          $NUnitReport | Export-NUnitReport -Path Last-TestsReport.NUnitXml
-          git config --global user.email "it@martin-walther.ch"
-          git config --global user.name "Martin Walther"
+          $NUnitReport | Export-NUnitReport -Path $ReportFullName #Last-TestsReport.NUnitXml
+          
+          Write-Host "Create CSV-Report"
+          if(Test-Path $CsvFullName){
+            $null = Remove-Item -Path $CsvFullName -Force
+          }
+          $result = . "$($BinPath)/Read-FromXML.ps1" -Inputfile $ReportFullName
+          $result.Tests | ConvertTo-Csv | Out-File -FilePath $($ReportFullName -replace '.NUnitXml', '.csv') -Encoding utf8 -NoClobber -Force
+
+          Write-Host "Update README.md"
+          Add-Content -Path $ReadmeFullName -Value "`n## Last Pester-run"
+          Add-Content -Path $ReadmeFullName -Value "`nLast run from $($result.ExecutedAt) finished with result $($result.Result). Fore more information, see Reports/Last-TestsReport.csv"
+          Add-Content -Path $ReadmeFullName -Value "Result|Count"
+          Add-Content -Path $ReadmeFullName -Value "-|-"
+          Add-Content -Path $ReadmeFullName -Value "Total|$($result.TotalCount)"
+          Add-Content -Path $ReadmeFullName -Value "Passed|$($result.PassedCount)"
+          Add-Content -Path $ReadmeFullName -Value "Failed|$($result.FailedCount)"
+          Add-Content -Path $ReadmeFullName -Value "Error|$($result.ErrorCount)"
+          Add-Content -Path $ReadmeFullName -Value "Skipped|$($result.SkippedCount)"
+          Add-Content -Path $ReadmeFullName -Value "NotRun|$($result.NotRunCount)"
+
+      - name: Upload changes
+        run: |
+          $branch_name   = $( "${{ github.event.issue.title }}" ) -replace '\s', '_'
+          $body_content  = $( "${{ github.event.issue.body }}" ) -replace "`r`n", ' '
+          $CommitMessage = ./Bin/New-BranchContent.ps1 -BranchName $branch_name -BodyContent $body_content -verbose
           git add .
-          git commit -m "Upload Last-TestsReport.NUnitXml"
-          git push
+          git commit -m $CommitMessage
+          git push origin $branch_name
 
       # Merge in to main branch
       - name: Merge in to main branch
