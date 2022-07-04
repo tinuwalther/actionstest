@@ -73,7 +73,7 @@ jobs:
           #Add-Content -Path $ReadmeFullName -Value "`nLast run from $($result.ExecutedAt) finished with result $($result.Result). Fore more information, see Reports/Last-TestsReport.csv"
           #Add-Content -Path $ReadmeFullName -Value "`nLast run|Result|Total|Passed|Failed|Error|Skipped|NotRun"
           #Add-Content -Path $ReadmeFullName -Value "-|-|-|-|-|-|-|-"
-          Add-Content -Path $ReadmeFullName -Value $($result.ExecutedAt)|$($result.Result)|$($result.TotalCount)|$($result.PassedCount)|$($result.FailedCount)|$($result.ErrorCount)|$($result.SkippedCount)|$($result.NotRunCount)"
+          Add-Content -Path $ReadmeFullName -Value "$($result.ExecutedAt)|$($result.Result)|$($result.TotalCount)|$($result.PassedCount)|$($result.FailedCount)|$($result.ErrorCount)|$($result.SkippedCount)|$($result.NotRunCount)"
 
       - name: Upload Pester Result
         run: |
