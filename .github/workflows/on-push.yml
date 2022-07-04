@@ -41,9 +41,8 @@ jobs:
           $config.Filter.Tag = "Required"
           $config.Output.Verbosity = 'Detailed'
           $config.Run.PassThru = $true
-          $ReportDir = New-Item -Path ../Reports -ItemType Directory
           $NUnitReport = Invoke-Pester -Configuration $config
-          cd $ReportDir.FullName
+          cd ../Reports
           $NUnitReport | Export-NUnitReport -Path Last-TestsReport.NUnitXml
           git config --global user.email "it@martin-walther.ch"
           git config --global user.name "Martin Walther"
@@ -51,6 +50,8 @@ jobs:
           git commit -m "Upload Last-TestsReport.NUnitXml"
           git push
 
+      - name: Push feature branch
+        run: Write-Host "Autopush ${{ github.event.pull_request.head }}"
 
     #  - name: Upload test results
     #    uses: actions/upload-artifact@v3
