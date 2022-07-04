@@ -35,7 +35,7 @@ jobs:
       - name: Test with Pester
         run: |
           cd Tests
-          Install-Module -Name psyml -force
+          Install-Module -Name psyml, pshtml -force
           Import-Module -Name Pester -MinimumVersion 5.3.3
           $config = [PesterConfiguration]::Default
           $config.Filter.Tag = "Required"
@@ -50,6 +50,10 @@ jobs:
           }
           cd $ReportsPath
           $NUnitReport | Export-NUnitReport -Path Last-TestsReport.NUnitXml
+          ./Bin/New-PesterReport.ps1
+
+      - name: Upload Pester Result
+        run: |
           git config --global user.email "it@martin-walther.ch"
           git config --global user.name "Martin Walther"
           git add .
