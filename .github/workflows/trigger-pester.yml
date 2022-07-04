@@ -34,7 +34,8 @@ jobs:
 
       - name: Test with Pester
         run: |
-          cd Tests
+          $CurrentLocation = Get-Location
+          Set-Location Tests
           Install-Module -Name psyml, pshtml -force
           Import-Module -Name Pester -MinimumVersion 5.3.3
           $config = [PesterConfiguration]::Default
@@ -48,8 +49,9 @@ jobs:
           if(-not(Test-Path $ReportsPath)){
             $null = New-Item -Path $ReportsPath -ItemType Directory
           }
-          cd $ReportsPath
+          Set-Location $ReportsPath
           $NUnitReport | Export-NUnitReport -Path Last-TestsReport.NUnitXml
+          Set-Location $CurrentLocation
           ./Bin/New-PesterReport.ps1
 
       - name: Upload Pester Result
@@ -63,11 +65,10 @@ jobs:
       - name: Dump GitHub context
         id: github_context_step
         run: echo '${{ toJSON(github) }}'
+      if: ${{ always() }}
 
       - name: Dump job context
         run: echo '${{ toJSON(job) }}'
 
       - name: Dump steps context
         run: echo '${{ toJSON(steps) }}'
-
-    #if: ${{ always() }}
