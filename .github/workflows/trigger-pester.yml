@@ -61,7 +61,7 @@ jobs:
           $NUnitReport | Export-NUnitReport -Path $ReportFullName #Last-TestsReport.NUnitXml
           
           Write-Host "Create CSV-Report"
-          $result = ./$BinPath/Read-FromXML.ps1 -Inputfile $ReportFullName
+          $result = ./$($BinPath)/Read-FromXML.ps1 -Inputfile $ReportFullName
           $result.Tests | ConvertTo-Csv | Out-File -FilePath $($ReportFullName -replace '.NUnitXml', '.csv') -Encoding utf8 -NoClobber -Force
 
           Write-Host "Update README.md"
@@ -79,9 +79,9 @@ jobs:
         run: |
           git config --global user.email "it@martin-walther.ch"
           git config --global user.name "Martin Walther"
-          git add Last-TestsReport.NUnitXml
+          git add Reports/Last-TestsReport.NUnitXml
           git commit -m "Upload Last-TestsReport.NUnitXml"
-          git add Last-TestsReport.csv
+          git add Reports/Last-TestsReport.csv
           git commit -m "Upload Last-TestsReport.csv"
           git add README.md
           git commit -m "Update README.md"
