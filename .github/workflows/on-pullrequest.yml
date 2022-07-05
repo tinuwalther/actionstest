@@ -35,7 +35,7 @@ jobs:
           Write-Host "Current branch is $currentbranch"
 
       # Run Pester Tests
-      - name: Invoke Pester Tests and upload results
+      - name: Invoke Pester Tests
         run: |
           git branch
           Write-Host "Install and import Modules"
