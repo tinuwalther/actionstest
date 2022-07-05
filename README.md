@@ -6,7 +6,7 @@
 
 ### 1. Create a new issue with the name of a computer
 
-A GitHub Action creates a new feature branch with en example Yaml-file. 
+A GitHub Action creates a new feature branch with en example Yaml-file.  
 
 ![GitHub issues](https://img.shields.io/github/issues-raw/tinuwalther/actionstest)
 
@@ -36,6 +36,8 @@ Merge the Pull Request manually. Later, this should be done with a GitHub Action
 
 Fore more information, see Reports/Last-TestsReport.csv
 
-Last run|Result|Total|Passed|Failed|Error|Skipped|NotRun
+Last run (UTC)|Result|Total|Passed|Failed|Error|Skipped|NotRun
 -|-|-|-|-|-|-|-
 2022-07-04 11:44:23|Success|7|6|0|0|0|1
+2022-07-05 13:07:45|Failure|26|19|3|0|0|4
+2022-07-05 13:29:45|Success|8|8|0|0|0|0

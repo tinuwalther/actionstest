@@ -35,7 +35,7 @@ jobs:
           Write-Host "Current branch is $currentbranch"
 
       # Run Pester Tests
-      - name: Invoke Pester Tests
+      - name: Invoke Pester Tests and upload results
         run: |
           git branch
           Write-Host "Install and import Modules"
@@ -57,6 +57,7 @@ jobs:
           $config.Filter.Tag         = "Required"
           $config.Output.Verbosity   = 'Normal'
           $config.Run.PassThru       = $true
+          $config.Run.Throw          = $true
           $NUnitReport = Invoke-Pester -Configuration $config
 
           Write-Host "Create Last-TestsReport.NUnitXml"
@@ -80,7 +81,9 @@ jobs:
           Add-Content -Path $ReadmeFullName -Value "$($result.ExecutedAt)|$($result.Result)|$($result.TotalCount)|$($result.PassedCount)|$($result.FailedCount)|$($result.ErrorCount)|$($result.SkippedCount)|$($result.NotRunCount)"
 
       - name: Upload changes
+        if: always()
         run: |
+          Write-Host "Upload results"
           git config --global user.email "it@martin-walther.ch"
           git config --global user.name "Martin Walther"
           $currentbranch = git branch --show-current
@@ -92,8 +95,10 @@ jobs:
 
       # Merge in to main branch
       - name: Merge in to main branch
+        if: success()
         run: Write-Host "Automerge  ${{ github.event.pull_request }}"
 
       # Delete feature branch
       - name: Delete feature branch
+        if: success()
         run: Write-Host "Autodelete ${{ github.event.pull_request }}"
