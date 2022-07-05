@@ -2,7 +2,6 @@
 
     BeforeAll {
         $RootFolder = $PSScriptRoot | Split-Path -Parent
-        $BinFolder  = Join-Path -Path $RootFolder -ChildPath 'Bin'
         $NodeFolder = Join-Path -Path $RootFolder -ChildPath 'Nodes'
 
         function Get-DuplicatedValue {
@@ -19,21 +18,15 @@
     
             # Duplicated fields
             #Import-Module "$($env:ProgramFiles)\PowerShell\Modules\psyml"
-            $AllNodes = foreach($node in (Get-ChildItem $NodeFolder )){
-                $Content = Get-Content -Path $node.FullName | ConvertFrom-Yaml
-                $Content | Add-Member -Type NoteProperty -Name File -Value $node.Name
-                $Content
+            $Nodes = foreach($node in (Get-ChildItem $NodeFolder )){
+                Get-Content -Path $node.FullName | ConvertFrom-Yaml
             }
-    
-            $Unique = $AllNodes | Select $Filed -unique
-    
-            $Properties = @{
-                ReferenceObject  = $AllNodes.$Filed
-                DifferenceObject = $Unique.$Filed
+            $ret = foreach($item in ($Nodes.$Filed | Group-Object)){
+                if($item.count -gt 1){
+                    $item.Name
+                }
             }
-            $Duplicated = Compare-Object @Properties -PassThru | Select -unique
-    
-            return $Duplicated
+            return $ret
     
         }
     
