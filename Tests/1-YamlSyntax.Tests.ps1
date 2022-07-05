@@ -6,7 +6,7 @@ BeforeDiscovery {
     $NodeFiles  = Get-ChildItem $NodeFolder
 }
 
-Describe "Validate Yaml Syntax from <_.Name>" -Tag 'Test' -ForEach $NodeFiles {
+Describe "Validate Yaml Syntax from <_.Name>" -Tag 'Required' -ForEach $NodeFiles {
 
     It "[POS] Reading of <_.Name> should not throw" {
         { $_.Fullname | ConvertFrom-Yaml } | Should -Not -Throw
