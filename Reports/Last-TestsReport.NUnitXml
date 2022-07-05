@@ -1,50 +1,50 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
-<test-results xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="nunit_schema_2.5.xsd" name="Pester" total="6" errors="0" failures="2" not-run="20" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2022-07-05" time="12:30:57">
-  <environment cwd="/home/runner/work/actionstest/actionstest" os-version="5.13.0-1031-azure" user="runner" user-domain="" nunit-version="2.5.8.0" platform="Linux" clr-version="Unknown" machine-name="fv-az183-441" />
+<test-results xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="nunit_schema_2.5.xsd" name="Pester" total="6" errors="0" failures="2" not-run="20" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2022-07-05" time="12:36:34">
+  <environment cwd="/home/runner/work/actionstest/actionstest" nunit-version="2.5.8.0" platform="Linux" user="runner" user-domain="" os-version="5.13.0-1031-azure" clr-version="Unknown" machine-name="fv-az154-846" />
   <culture-info current-culture="" current-uiculture="" />
-  <test-suite type="TestFixture" name="Pester" executed="True" result="Failure" success="False" time="0.783" asserts="0" description="Pester">
+  <test-suite type="TestFixture" name="Pester" executed="True" result="Failure" success="False" time="0.8686" asserts="0" description="Pester">
     <results>
-      <test-suite type="TestFixture" name="/home/runner/work/actionstest/actionstest/Tests/1-YamlSyntax.Tests.ps1" executed="True" result="Success" success="True" time="0.5868" asserts="0" description="/home/runner/work/actionstest/actionstest/Tests/1-YamlSyntax.Tests.ps1">
+      <test-suite type="TestFixture" name="/home/runner/work/actionstest/actionstest/Tests/1-YamlSyntax.Tests.ps1" executed="True" result="Success" success="True" time="0.6495" asserts="0" description="/home/runner/work/actionstest/actionstest/Tests/1-YamlSyntax.Tests.ps1">
         <results>
-          <test-suite type="TestFixture" name="Validate Yaml Syntax from example.yml" executed="True" result="Success" success="True" time="0.2051" asserts="0" description="Validate Yaml Syntax from example.yml">
+          <test-suite type="TestFixture" name="Validate Yaml Syntax from example.yml" executed="True" result="Success" success="True" time="0.145" asserts="0" description="Validate Yaml Syntax from example.yml">
             <results>
-              <test-case description="[POS] Reading of example.yml should not throw" name="Validate Yaml Syntax from example.yml.[POS] Reading of example.yml should not throw" time="0.1107" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="[POS] Reading of example.yml should not throw" name="Validate Yaml Syntax from example.yml.[POS] Reading of example.yml should not throw" time="0.1125" asserts="0" success="True" result="Success" executed="True" />
             </results>
           </test-suite>
-          <test-suite type="TestFixture" name="Validate Yaml Syntax from test123.yml" executed="True" result="Success" success="True" time="0.2132" asserts="0" description="Validate Yaml Syntax from test123.yml">
+          <test-suite type="TestFixture" name="Validate Yaml Syntax from test123.yml" executed="True" result="Success" success="True" time="0.1538" asserts="0" description="Validate Yaml Syntax from test123.yml">
             <results>
-              <test-case description="[POS] Reading of test123.yml should not throw" name="Validate Yaml Syntax from test123.yml.[POS] Reading of test123.yml should not throw" time="0.0046" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="[POS] Reading of test123.yml should not throw" name="Validate Yaml Syntax from test123.yml.[POS] Reading of test123.yml should not throw" time="0.005" asserts="0" success="True" result="Success" executed="True" />
             </results>
           </test-suite>
-          <test-suite type="TestFixture" name="Validate Yaml Syntax from test234.yml" executed="True" result="Success" success="True" time="0.2262" asserts="0" description="Validate Yaml Syntax from test234.yml">
+          <test-suite type="TestFixture" name="Validate Yaml Syntax from test234.yml" executed="True" result="Success" success="True" time="0.1628" asserts="0" description="Validate Yaml Syntax from test234.yml">
             <results>
-              <test-case description="[POS] Reading of test234.yml should not throw" name="Validate Yaml Syntax from test234.yml.[POS] Reading of test234.yml should not throw" time="0.0096" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="[POS] Reading of test234.yml should not throw" name="Validate Yaml Syntax from test234.yml.[POS] Reading of test234.yml should not throw" time="0.0055" asserts="0" success="True" result="Success" executed="True" />
             </results>
           </test-suite>
-          <test-suite type="TestFixture" name="Validate Yaml Syntax from test345.yml" executed="True" result="Success" success="True" time="0.2351" asserts="0" description="Validate Yaml Syntax from test345.yml">
+          <test-suite type="TestFixture" name="Validate Yaml Syntax from test345.yml" executed="True" result="Success" success="True" time="0.1733" asserts="0" description="Validate Yaml Syntax from test345.yml">
             <results>
-              <test-case description="[POS] Reading of test345.yml should not throw" name="Validate Yaml Syntax from test345.yml.[POS] Reading of test345.yml should not throw" time="0.0042" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="[POS] Reading of test345.yml should not throw" name="Validate Yaml Syntax from test345.yml.[POS] Reading of test345.yml should not throw" time="0.005" asserts="0" success="True" result="Success" executed="True" />
             </results>
           </test-suite>
         </results>
       </test-suite>
-      <test-suite type="TestFixture" name="/home/runner/work/actionstest/actionstest/Tests/3-DuplicatedValues.Tests.ps1" executed="True" result="Failure" success="False" time="0.1458" asserts="0" description="/home/runner/work/actionstest/actionstest/Tests/3-DuplicatedValues.Tests.ps1">
+      <test-suite type="TestFixture" name="/home/runner/work/actionstest/actionstest/Tests/3-DuplicatedValues.Tests.ps1" executed="True" result="Failure" success="False" time="0.1972" asserts="0" description="/home/runner/work/actionstest/actionstest/Tests/3-DuplicatedValues.Tests.ps1">
         <results>
-          <test-suite type="TestFixture" name="Test for duplicated values" executed="True" result="Failure" success="False" time="0.1141" asserts="0" description="Test for duplicated values">
+          <test-suite type="TestFixture" name="Test for duplicated values" executed="True" result="Failure" success="False" time="0.1725" asserts="0" description="Test for duplicated values">
             <results>
-              <test-suite type="ParameterizedTest" name="Test for duplicated values.[POS] &lt;_&gt; should not have duplicated values" executed="True" result="Failure" success="False" time="0.1096" asserts="0" description="[POS] &lt;_&gt; should not have duplicated values">
+              <test-suite type="ParameterizedTest" name="Test for duplicated values.[POS] &lt;_&gt; should not have duplicated values" executed="True" result="Failure" success="False" time="0.1678" asserts="0" description="[POS] &lt;_&gt; should not have duplicated values">
                 <results>
-                  <test-case description="[POS] Name should not have duplicated values" name="Test for duplicated values.[POS] Name should not have duplicated values" time="0.0928" asserts="0" success="False" result="Failure" executed="True">
+                  <test-case description="[POS] Name should not have duplicated values" name="Test for duplicated values.[POS] Name should not have duplicated values" time="0.1467" asserts="0" success="False" result="Failure" executed="True">
                     <failure>
-                      <message>SyntaxErrorException: (Line: 7, Col: 3, Idx: 138) - (Line: 7, Col: 3, Idx: 138): While scanning a simple key, could not find expected ':'.</message>
-                      <stack-trace>at Get-DuplicatedValue, /home/runner/work/actionstest/actionstest/Tests/3-DuplicatedValues.Tests.ps1:22
+                      <message>Expected $null or empty, but got test123.</message>
+                      <stack-trace>at Get-DuplicatedValue -Filed $_ | Should -BeNullOrEmpty, /home/runner/work/actionstest/actionstest/Tests/3-DuplicatedValues.Tests.ps1:36
 at &lt;ScriptBlock&gt;, /home/runner/work/actionstest/actionstest/Tests/3-DuplicatedValues.Tests.ps1:36</stack-trace>
                     </failure>
                   </test-case>
-                  <test-case description="[POS] IPAddress should not have duplicated values" name="Test for duplicated values.[POS] IPAddress should not have duplicated values" time="0.0168" asserts="0" success="False" result="Failure" executed="True">
+                  <test-case description="[POS] IPAddress should not have duplicated values" name="Test for duplicated values.[POS] IPAddress should not have duplicated values" time="0.0212" asserts="0" success="False" result="Failure" executed="True">
                     <failure>
-                      <message>SyntaxErrorException: (Line: 7, Col: 3, Idx: 138) - (Line: 7, Col: 3, Idx: 138): While scanning a simple key, could not find expected ':'.</message>
-                      <stack-trace>at Get-DuplicatedValue, /home/runner/work/actionstest/actionstest/Tests/3-DuplicatedValues.Tests.ps1:22
+                      <message>Expected $null or empty, but got 192.168.254.10.</message>
+                      <stack-trace>at Get-DuplicatedValue -Filed $_ | Should -BeNullOrEmpty, /home/runner/work/actionstest/actionstest/Tests/3-DuplicatedValues.Tests.ps1:36
 at &lt;ScriptBlock&gt;, /home/runner/work/actionstest/actionstest/Tests/3-DuplicatedValues.Tests.ps1:36</stack-trace>
                     </failure>
                   </test-case>
