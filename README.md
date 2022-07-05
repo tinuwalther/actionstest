@@ -40,3 +40,4 @@ Last run|Result|Total|Passed|Failed|Error|Skipped|NotRun
 -|-|-|-|-|-|-|-
 2022-07-04 11:44:23|Success|7|6|0|0|0|1
 2022-07-05 12:44:22|Failure|26|19|7|0|0|0
+2022-07-05 12:50:25|Failure|26|23|3|0|0|0
