@@ -5,7 +5,7 @@ BeforeDiscovery {
     $yamlfile   = Get-ChildItem $yamlpath
 }
 
-Describe "Validate Input from <_.Name>" -Tag 'Required' -ForEach $yamlfile {
+Describe "Validate Input from <_.Name>" -Tag 'Test' -ForEach $yamlfile {
 
     BeforeAll{
         $yamlobject = get-content $_.FullName | ConvertFrom-Yaml
