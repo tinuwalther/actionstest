@@ -6,7 +6,7 @@
 
 ### 1. Create a new issue with the name of a computer
 
-A GitHub Action creates a new feature branch with en example Yaml-file. 
+A GitHub Action creates a new feature branch with en example Yaml-file.  
 
 ![GitHub issues](https://img.shields.io/github/issues-raw/tinuwalther/actionstest)
 
