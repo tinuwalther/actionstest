@@ -1,47 +1,117 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
-<test-results xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="nunit_schema_2.5.xsd" name="Pester" total="6" errors="0" failures="2" not-run="20" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2022-07-05" time="12:36:34">
-  <environment cwd="/home/runner/work/actionstest/actionstest" nunit-version="2.5.8.0" platform="Linux" user="runner" user-domain="" os-version="5.13.0-1031-azure" clr-version="Unknown" machine-name="fv-az154-846" />
+<test-results xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="nunit_schema_2.5.xsd" name="Pester" total="26" errors="0" failures="7" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2022-07-05" time="12:44:22">
+  <environment cwd="/home/runner/work/actionstest/actionstest" machine-name="fv-az135-432" user-domain="" platform="Linux" clr-version="Unknown" user="runner" os-version="5.13.0-1031-azure" nunit-version="2.5.8.0" />
   <culture-info current-culture="" current-uiculture="" />
-  <test-suite type="TestFixture" name="Pester" executed="True" result="Failure" success="False" time="0.8686" asserts="0" description="Pester">
+  <test-suite type="TestFixture" name="Pester" executed="True" result="Failure" success="False" time="1.1062" asserts="0" description="Pester">
     <results>
-      <test-suite type="TestFixture" name="/home/runner/work/actionstest/actionstest/Tests/1-YamlSyntax.Tests.ps1" executed="True" result="Success" success="True" time="0.6495" asserts="0" description="/home/runner/work/actionstest/actionstest/Tests/1-YamlSyntax.Tests.ps1">
+      <test-suite type="TestFixture" name="/home/runner/work/actionstest/actionstest/Tests/1-YamlSyntax.Tests.ps1" executed="True" result="Success" success="True" time="0.5905" asserts="0" description="/home/runner/work/actionstest/actionstest/Tests/1-YamlSyntax.Tests.ps1">
         <results>
-          <test-suite type="TestFixture" name="Validate Yaml Syntax from example.yml" executed="True" result="Success" success="True" time="0.145" asserts="0" description="Validate Yaml Syntax from example.yml">
+          <test-suite type="TestFixture" name="Validate Yaml Syntax from example.yml" executed="True" result="Success" success="True" time="0.1843" asserts="0" description="Validate Yaml Syntax from example.yml">
             <results>
-              <test-case description="[POS] Reading of example.yml should not throw" name="Validate Yaml Syntax from example.yml.[POS] Reading of example.yml should not throw" time="0.1125" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="[POS] Reading of example.yml should not throw" name="Validate Yaml Syntax from example.yml.[POS] Reading of example.yml should not throw" time="0.1484" asserts="0" success="True" result="Success" executed="True" />
             </results>
           </test-suite>
-          <test-suite type="TestFixture" name="Validate Yaml Syntax from test123.yml" executed="True" result="Success" success="True" time="0.1538" asserts="0" description="Validate Yaml Syntax from test123.yml">
+          <test-suite type="TestFixture" name="Validate Yaml Syntax from test123.yml" executed="True" result="Success" success="True" time="0.2079" asserts="0" description="Validate Yaml Syntax from test123.yml">
             <results>
-              <test-case description="[POS] Reading of test123.yml should not throw" name="Validate Yaml Syntax from test123.yml.[POS] Reading of test123.yml should not throw" time="0.005" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="[POS] Reading of test123.yml should not throw" name="Validate Yaml Syntax from test123.yml.[POS] Reading of test123.yml should not throw" time="0.0056" asserts="0" success="True" result="Success" executed="True" />
             </results>
           </test-suite>
-          <test-suite type="TestFixture" name="Validate Yaml Syntax from test234.yml" executed="True" result="Success" success="True" time="0.1628" asserts="0" description="Validate Yaml Syntax from test234.yml">
+          <test-suite type="TestFixture" name="Validate Yaml Syntax from test234.yml" executed="True" result="Success" success="True" time="0.2232" asserts="0" description="Validate Yaml Syntax from test234.yml">
             <results>
-              <test-case description="[POS] Reading of test234.yml should not throw" name="Validate Yaml Syntax from test234.yml.[POS] Reading of test234.yml should not throw" time="0.0055" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="[POS] Reading of test234.yml should not throw" name="Validate Yaml Syntax from test234.yml.[POS] Reading of test234.yml should not throw" time="0.005" asserts="0" success="True" result="Success" executed="True" />
             </results>
           </test-suite>
-          <test-suite type="TestFixture" name="Validate Yaml Syntax from test345.yml" executed="True" result="Success" success="True" time="0.1733" asserts="0" description="Validate Yaml Syntax from test345.yml">
+          <test-suite type="TestFixture" name="Validate Yaml Syntax from test345.yml" executed="True" result="Success" success="True" time="0.2337" asserts="0" description="Validate Yaml Syntax from test345.yml">
             <results>
-              <test-case description="[POS] Reading of test345.yml should not throw" name="Validate Yaml Syntax from test345.yml.[POS] Reading of test345.yml should not throw" time="0.005" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="[POS] Reading of test345.yml should not throw" name="Validate Yaml Syntax from test345.yml.[POS] Reading of test345.yml should not throw" time="0.0052" asserts="0" success="True" result="Success" executed="True" />
             </results>
           </test-suite>
         </results>
       </test-suite>
-      <test-suite type="TestFixture" name="/home/runner/work/actionstest/actionstest/Tests/3-DuplicatedValues.Tests.ps1" executed="True" result="Failure" success="False" time="0.1972" asserts="0" description="/home/runner/work/actionstest/actionstest/Tests/3-DuplicatedValues.Tests.ps1">
+      <test-suite type="TestFixture" name="/home/runner/work/actionstest/actionstest/Tests/2-InputValidation.Tests.ps1" executed="True" result="Failure" success="False" time="0.4195" asserts="0" description="/home/runner/work/actionstest/actionstest/Tests/2-InputValidation.Tests.ps1">
         <results>
-          <test-suite type="TestFixture" name="Test for duplicated values" executed="True" result="Failure" success="False" time="0.1725" asserts="0" description="Test for duplicated values">
+          <test-suite type="TestFixture" name="Validate Input from example.yml" executed="True" result="Failure" success="False" time="0.2301" asserts="0" description="Validate Input from example.yml">
             <results>
-              <test-suite type="ParameterizedTest" name="Test for duplicated values.[POS] &lt;_&gt; should not have duplicated values" executed="True" result="Failure" success="False" time="0.1678" asserts="0" description="[POS] &lt;_&gt; should not have duplicated values">
+              <test-case description="[POS] The Property Name should contains characters and numbers" name="Validate Input from example.yml.[POS] The Property Name should contains characters and numbers" time="0.1136" asserts="0" success="False" result="Failure" executed="True">
+                <failure>
+                  <message>Expected regular expression '\w+\d+' to match $null, but it did not match.</message>
+                  <stack-trace>at $($yamlobject.Name) | Should -Match "\w+\d+", /home/runner/work/actionstest/actionstest/Tests/2-InputValidation.Tests.ps1:15
+at &lt;ScriptBlock&gt;, /home/runner/work/actionstest/actionstest/Tests/2-InputValidation.Tests.ps1:15</stack-trace>
+                </failure>
+              </test-case>
+              <test-case description="[POS] The Property IPAddress should contains IPv4Address" name="Validate Input from example.yml.[POS] The Property IPAddress should contains IPv4Address" time="0.0159" asserts="0" success="False" result="Failure" executed="True">
+                <failure>
+                  <message>Expected regular expression '^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)' to match $null, but it did not match.</message>
+                  <stack-trace>at $($yamlobject.IPAddress) | Should -Match '^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)', /home/runner/work/actionstest/actionstest/Tests/2-InputValidation.Tests.ps1:18
+at &lt;ScriptBlock&gt;, /home/runner/work/actionstest/actionstest/Tests/2-InputValidation.Tests.ps1:18</stack-trace>
+                </failure>
+              </test-case>
+              <test-case description="[POS] The Property Subnet should contains Subnet mask" name="Validate Input from example.yml.[POS] The Property Subnet should contains Subnet mask" time="0.0552" asserts="0" success="False" result="Failure" executed="True">
+                <failure>
+                  <message>Expected regular expression '^(((255\.){3}(255|254|252|248|240|224|192|128+))|((255\.){2}(255|254|252|248|240|224|192|128|0+)\.0)|((255\.)(255|254|252|248|240|224|192|128|0+)(\.0+){2})|((255|254|252|248|240|224|192|128|0+)(\.0+){3}))$' to match $null, but it did not match.</message>
+                  <stack-trace>at $($yamlobject.Subnet) | Should -Match '^(((255\.){3}(255|254|252|248|240|224|192|128+))|((255\.){2}(255|254|252|248|240|224|192|128|0+)\.0)|((255\.)(255|254|252|248|240|224|192|128|0+)(\.0+){2})|((255|254|252|248|240|224|192|128|0+)(\.0+){3}))$', /home/runner/work/actionstest/actionstest/Tests/2-InputValidation.Tests.ps1:21
+at &lt;ScriptBlock&gt;, /home/runner/work/actionstest/actionstest/Tests/2-InputValidation.Tests.ps1:21</stack-trace>
+                </failure>
+              </test-case>
+              <test-case description="[POS] The Property Gateway should contains IPv4Address" name="Validate Input from example.yml.[POS] The Property Gateway should contains IPv4Address" time="0.0121" asserts="0" success="False" result="Failure" executed="True">
+                <failure>
+                  <message>Expected regular expression '^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)' to match $null, but it did not match.</message>
+                  <stack-trace>at $($yamlobject.Gateway) | Should -Match '^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)', /home/runner/work/actionstest/actionstest/Tests/2-InputValidation.Tests.ps1:24
+at &lt;ScriptBlock&gt;, /home/runner/work/actionstest/actionstest/Tests/2-InputValidation.Tests.ps1:24</stack-trace>
+                </failure>
+              </test-case>
+              <test-case description="[POS] The Property Status should contains done or new" name="Validate Input from example.yml.[POS] The Property Status should contains done or new" time="0.0117" asserts="0" success="False" result="Failure" executed="True">
+                <failure>
+                  <message>Expected regular expression 'done|new' to match $null, but it did not match.</message>
+                  <stack-trace>at $($yamlobject.Status) | Should -Match 'done|new', /home/runner/work/actionstest/actionstest/Tests/2-InputValidation.Tests.ps1:27
+at &lt;ScriptBlock&gt;, /home/runner/work/actionstest/actionstest/Tests/2-InputValidation.Tests.ps1:27</stack-trace>
+                </failure>
+              </test-case>
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="Validate Input from test123.yml" executed="True" result="Success" success="True" time="0.257" asserts="0" description="Validate Input from test123.yml">
+            <results>
+              <test-case description="[POS] The Property Name should contains characters and numbers" name="Validate Input from test123.yml.[POS] The Property Name should contains characters and numbers" time="0.0037" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="[POS] The Property IPAddress should contains IPv4Address" name="Validate Input from test123.yml.[POS] The Property IPAddress should contains IPv4Address" time="0.0045" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="[POS] The Property Subnet should contains Subnet mask" name="Validate Input from test123.yml.[POS] The Property Subnet should contains Subnet mask" time="0.0046" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="[POS] The Property Gateway should contains IPv4Address" name="Validate Input from test123.yml.[POS] The Property Gateway should contains IPv4Address" time="0.0045" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="[POS] The Property Status should contains done or new" name="Validate Input from test123.yml.[POS] The Property Status should contains done or new" time="0.0044" asserts="0" success="True" result="Success" executed="True" />
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="Validate Input from test234.yml" executed="True" result="Success" success="True" time="0.2799" asserts="0" description="Validate Input from test234.yml">
+            <results>
+              <test-case description="[POS] The Property Name should contains characters and numbers" name="Validate Input from test234.yml.[POS] The Property Name should contains characters and numbers" time="0.0037" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="[POS] The Property IPAddress should contains IPv4Address" name="Validate Input from test234.yml.[POS] The Property IPAddress should contains IPv4Address" time="0.0036" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="[POS] The Property Subnet should contains Subnet mask" name="Validate Input from test234.yml.[POS] The Property Subnet should contains Subnet mask" time="0.0035" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="[POS] The Property Gateway should contains IPv4Address" name="Validate Input from test234.yml.[POS] The Property Gateway should contains IPv4Address" time="0.0035" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="[POS] The Property Status should contains done or new" name="Validate Input from test234.yml.[POS] The Property Status should contains done or new" time="0.0035" asserts="0" success="True" result="Success" executed="True" />
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="Validate Input from test345.yml" executed="True" result="Success" success="True" time="0.3534" asserts="0" description="Validate Input from test345.yml">
+            <results>
+              <test-case description="[POS] The Property Name should contains characters and numbers" name="Validate Input from test345.yml.[POS] The Property Name should contains characters and numbers" time="0.0039" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="[POS] The Property IPAddress should contains IPv4Address" name="Validate Input from test345.yml.[POS] The Property IPAddress should contains IPv4Address" time="0.0051" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="[POS] The Property Subnet should contains Subnet mask" name="Validate Input from test345.yml.[POS] The Property Subnet should contains Subnet mask" time="0.0037" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="[POS] The Property Gateway should contains IPv4Address" name="Validate Input from test345.yml.[POS] The Property Gateway should contains IPv4Address" time="0.0242" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="[POS] The Property Status should contains done or new" name="Validate Input from test345.yml.[POS] The Property Status should contains done or new" time="0.0243" asserts="0" success="True" result="Success" executed="True" />
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+      <test-suite type="TestFixture" name="/home/runner/work/actionstest/actionstest/Tests/3-DuplicatedValues.Tests.ps1" executed="True" result="Failure" success="False" time="0.0962" asserts="0" description="/home/runner/work/actionstest/actionstest/Tests/3-DuplicatedValues.Tests.ps1">
+        <results>
+          <test-suite type="TestFixture" name="Test for duplicated values" executed="True" result="Failure" success="False" time="0.0677" asserts="0" description="Test for duplicated values">
+            <results>
+              <test-suite type="ParameterizedTest" name="Test for duplicated values.[POS] &lt;_&gt; should not have duplicated values" executed="True" result="Failure" success="False" time="0.0533" asserts="0" description="[POS] &lt;_&gt; should not have duplicated values">
                 <results>
-                  <test-case description="[POS] Name should not have duplicated values" name="Test for duplicated values.[POS] Name should not have duplicated values" time="0.1467" asserts="0" success="False" result="Failure" executed="True">
+                  <test-case description="[POS] Name should not have duplicated values" name="Test for duplicated values.[POS] Name should not have duplicated values" time="0.0363" asserts="0" success="False" result="Failure" executed="True">
                     <failure>
                       <message>Expected $null or empty, but got test123.</message>
                       <stack-trace>at Get-DuplicatedValue -Filed $_ | Should -BeNullOrEmpty, /home/runner/work/actionstest/actionstest/Tests/3-DuplicatedValues.Tests.ps1:36
 at &lt;ScriptBlock&gt;, /home/runner/work/actionstest/actionstest/Tests/3-DuplicatedValues.Tests.ps1:36</stack-trace>
                     </failure>
                   </test-case>
-                  <test-case description="[POS] IPAddress should not have duplicated values" name="Test for duplicated values.[POS] IPAddress should not have duplicated values" time="0.0212" asserts="0" success="False" result="Failure" executed="True">
+                  <test-case description="[POS] IPAddress should not have duplicated values" name="Test for duplicated values.[POS] IPAddress should not have duplicated values" time="0.017" asserts="0" success="False" result="Failure" executed="True">
                     <failure>
                       <message>Expected $null or empty, but got 192.168.254.10.</message>
                       <stack-trace>at Get-DuplicatedValue -Filed $_ | Should -BeNullOrEmpty, /home/runner/work/actionstest/actionstest/Tests/3-DuplicatedValues.Tests.ps1:36
