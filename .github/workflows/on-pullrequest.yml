@@ -81,7 +81,7 @@ jobs:
           Add-Content -Path $ReadmeFullName -Value "$($result.ExecutedAt)|$($result.Result)|$($result.TotalCount)|$($result.PassedCount)|$($result.FailedCount)|$($result.ErrorCount)|$($result.SkippedCount)|$($result.NotRunCount)"
 
       - name: Upload changes
-        if: always()
+        if: ${{ always() }}
         run: |
           Write-Host "Upload results"
           git config --global user.email "it@martin-walther.ch"
@@ -95,10 +95,10 @@ jobs:
 
       # Merge in to main branch
       - name: Merge in to main branch
-        if: success()
+        if: ${{ success() }}
         run: Write-Host "Automerge  ${{ github.event.pull_request }}"
 
       # Delete feature branch
       - name: Delete feature branch
-        if: success()
+        if: ${{ success() }}
         run: Write-Host "Autodelete ${{ github.event.pull_request }}"
