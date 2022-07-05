@@ -35,7 +35,7 @@ jobs:
           Write-Host "Current branch is $currentbranch"
 
       # Run Pester Tests
-      - name: Invoke Pester Tests
+      - name: Invoke Pester Tests and upload results
         run: |
           git branch
           Write-Host "Install and import Modules"
@@ -80,8 +80,6 @@ jobs:
           #Add-Content -Path $ReadmeFullName -Value "-|-|-|-|-|-|-|-"
           Add-Content -Path $ReadmeFullName -Value "$($result.ExecutedAt)|$($result.Result)|$($result.TotalCount)|$($result.PassedCount)|$($result.FailedCount)|$($result.ErrorCount)|$($result.SkippedCount)|$($result.NotRunCount)"
 
-      - name: Upload changes
-        run: |
           git config --global user.email "it@martin-walther.ch"
           git config --global user.name "Martin Walther"
           $currentbranch = git branch --show-current
