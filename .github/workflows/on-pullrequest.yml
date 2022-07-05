@@ -57,6 +57,7 @@ jobs:
           $config.Filter.Tag         = "Required"
           $config.Output.Verbosity   = 'Normal'
           $config.Run.PassThru       = $true
+          $config.Run.Throw          = $true
           $NUnitReport = Invoke-Pester -Configuration $config
 
           Write-Host "Create Last-TestsReport.NUnitXml"
