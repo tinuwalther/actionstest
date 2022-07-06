@@ -47,7 +47,7 @@ Edit the Yaml-file, add more Yaml-files and create a Pull request with the name 
 
 ### 3. Create a Pull request
 
-The Pull request trigger a GitHub Action that run Pester Tests and upload the result as Last-TestsReport.csv and Last-TestsReport.NUnitXml.
+The Pull request trigger a GitHub Action that runs Pester Tests, upload the result as Last-TestsReport.csv and Last-TestsReport.NUnitXml and update the table under Last Pester-run in the file README.md.
 
 ### 4. Merge the Pull Request
 
