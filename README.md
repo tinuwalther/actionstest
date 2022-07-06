@@ -10,17 +10,17 @@ I would like to do the following scenario with GitHub Actions, PowerShell and Pe
 sequenceDiagram
     actor User
     User->>main: New Issue
-    main->>GitHub Action New issue: Trigger Action 'Checkout feature branch'
-    GitHub Action New issue->>Feature branch: Check out feature branch
-    GitHub Action New issue->>Feature branch: Add new Yaml-file
-    GitHub Action New issue->>Feature branch: Push feature branch
-    GitHub Action New issue->>Feature branch: Close Issue
+    main->>Action New issue: Trigger Action 'Checkout feature branch'
+    Action New issue->>Feature branch: Check out feature branch
+    Action New issue->>Feature branch: Add new Yaml-file
+    Action New issue->>Feature branch: Push feature branch
+    Action New issue->>Feature branch: Close Issue
     User->>Feature branch: Edit Yaml
     User->>main: Pull request
-    main->>GitHub Action Pull request: Trigger Action 'Pull request'
-    GitHub Action Pull request->>Feature branch: Checkout feature branch
-    GitHub Action Pull request->>Feature branch: Invoke Pester Tests
-    GitHub Action Pull request->>Feature branch: Upload Test-files
+    main->>Action Pull request: Trigger Action 'Pull request'
+    Action Pull request->>Feature branch: Checkout feature branch
+    Action Pull request->>Feature branch: Invoke Pester Tests
+    Action Pull request->>Feature branch: Upload Test-files
     User->>Feature branch: Merge pull request
     Feature branch->>main: Merge and delete Feature branch
 ````
