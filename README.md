@@ -22,7 +22,7 @@ sequenceDiagram
     Action Pull request->>Feature branch: Invoke Pester Tests
     Action Pull request->>Feature branch: Upload Test-files
     critical Not yet available as action
-      UserAction Pull request->>Feature branch: Merge pull request
+      Action Pull request->>Feature branch: Merge pull request
       Feature branch->>main: Merge and delete Feature branch
     end
 ````
