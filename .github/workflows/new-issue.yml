@@ -27,8 +27,10 @@ jobs:
           $branch_name = $( "${{ github.event.issue.title }}" ) -replace '\s', '_'
           Write-Host "Issue ${{ github.event.issue.title }} created on ${{ github.repository }}"
           git checkout -b $branch_name
-          git config --global user.email "it@martin-walther.ch"
-          git config --global user.name "Martin Walther"
+          #git config --global user.email "it@martin-walther.ch"
+          #git config --global user.name "Martin Walther"
+          git config user.name github-actions
+          git config user.email github-actions@github.com
 
       - name: Add new file to feature branch
         run: |
