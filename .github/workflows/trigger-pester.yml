@@ -14,7 +14,7 @@ on:
         # Friendly description to be shown in the UI instead of 'name'
         description: 'branch name to checkout'
         # Default value if no value is explicitly provided
-        default: 'main'
+        default: git branch --show-current
         # Input has to be provided for the workflow to run
         required: true
 
@@ -53,7 +53,7 @@ jobs:
           $config.Filter.Tag         = "Required"
           $config.Output.Verbosity   = 'Normal'
           $config.Run.PassThru       = $true
-          #$config.Run.Throw          = $true
+          $config.Run.Throw          = $true
           $NUnitReport = Invoke-Pester -Configuration $config
 
           Write-Host "Create Last-TestsReport.NUnitXml"
@@ -77,6 +77,7 @@ jobs:
           Add-Content -Path $ReadmeFullName -Value "$($result.ExecutedAt)|$($result.Result)|$($result.TotalCount)|$($result.PassedCount)|$($result.FailedCount)|$($result.ErrorCount)|$($result.SkippedCount)|$($result.NotRunCount)"
 
       - name: Upload Pester Result
+        if: ${{ always() }}
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
