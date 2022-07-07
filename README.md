@@ -62,3 +62,4 @@ Fore more information, see Reports/Last-TestsReport.csv
 Last run (UTC)|Result|Total|Passed|Failed|Error|Skipped|NotRun
 -|-|-|-|-|-|-|-
 2022-07-05 13:29:45|Success|8|8|0|0|0|0
+2022-07-07 08:34:54|Failure|14|12|2|0|0|0
