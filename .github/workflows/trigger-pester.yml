@@ -78,8 +78,8 @@ jobs:
 
       - name: Upload Pester Result
         run: |
-          git config --global user.email "it@martin-walther.ch"
-          git config --global user.name "Martin Walther"
+          git config user.name github-actions
+          git config user.email github-actions@github.com
           git add Reports/Last-TestsReport.NUnitXml
           git commit -m "Upload Last-TestsReport.NUnitXml"
           git add Reports/Last-TestsReport.csv
