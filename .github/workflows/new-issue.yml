@@ -13,16 +13,12 @@ jobs:
   new_issue:
     runs-on: ubuntu-latest
     defaults:
-      run:
+      run: 
         shell: pwsh
+    env:
+        BRANCH_NAME: $( "${{ github.event.issue.title }}" ) -replace '\s', '_'
 
     steps:
-      - name: Define variables
-        run: |
-          $branch_name = $( "${{ github.event.issue.title }}" ) -replace '\s', '_'
-        env:
-          BRANCH_NAME: $branch_name
-
       - name: Echo Branch name
         run: Write-Host "Issue ${{ env.BRANCH_NAME }}"
 
