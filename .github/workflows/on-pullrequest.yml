@@ -82,8 +82,9 @@ jobs:
           Write-Host "Automerge ${{ github.event.pull_request.title }}"
           $currentbranch = git branch --show-current
           Write-Host "Current branch is $currentbranch"
-          git merge main
-          git push -u origin main
+          git pull
+          git merge --no-ff main -m "Auto-merge main"
+          git push
 
       - name: Delete feature branch
         if: ${{ success() }}
