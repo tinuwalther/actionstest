@@ -26,7 +26,7 @@ jobs:
 
       - name: Create name for feature branch
         run: |
-          $branch_name = ${{ env.BRANCH_NAME }} -replace '\s', '_'
+          $branch_name = $( "${{ BRANCH_NAME }}" ) -replace '\s', '_'
           Write-Host "feature branch $branch_name"
         env:
           BRANCH_NAME: $branch_name
