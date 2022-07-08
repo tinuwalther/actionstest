@@ -80,15 +80,8 @@ jobs:
         if: ${{ success() }}
         run: |
           Write-Host "Automerge ${{ github.event.pull_request.title }}"
-          $currentbranch = git branch --show-current
-          Write-Host "Current branch is $currentbranch"
-          git pull
-          git merge --no-ff main -m "Auto-merge main"
-          git push
 
       - name: Delete feature branch
         if: ${{ success() }}
         run: |
           Write-Host "Autodelete ${{ github.event.pull_request.title }}"
-          git checkout main
-          git branch -D ${{ github.event.pull_request.title }}
