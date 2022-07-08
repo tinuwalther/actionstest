@@ -17,26 +17,33 @@ jobs:
         shell: pwsh
 
     steps:
+      - name: Define variables
+        run: |
+          # Hard coded variable
+          $branch_name = $( "${{ github.event.issue.title }}" ) -replace '\s', '_'
+          echo $branch_name > BRANCH_NAME
+
+      - name: Echo Branch name
+        run: Write-Host BRANCH_Name
+
       - name: Clone repo ${{ github.repository }}
         uses: actions/checkout@v3
         with:
-          ref: ${{ github.event.issue.title }}
+          ref: main
 
-      #- name: Check out feature branch for issue ${{ github.event.issue.title }}
-      #  run: |
-      #    $branch_name = $( "${{ github.event.issue.title }}" ) -replace '\s', '_'
-      #    Write-Host "Issue ${{ github.event.issue.title }} created on ${{ github.repository }}"
-      #    git checkout -b $branch_name
-      #    git config user.name github-actions
-      #    git config user.email github-actions@github.com
+      - name: Check out feature branch for issue ${{ github.event.issue.title }}
+        run: |
+          $branch_name = $( "${{ github.event.issue.title }}" ) -replace '\s', '_'
+          Write-Host "Issue ${{ github.event.issue.title }} created on ${{ github.repository }}"
+          git checkout -b $branch_name
+          git config user.name github-actions
+          git config user.email github-actions@github.com
 
       - name: Add new file to feature branch
         run: |
           $branch_name   = $( "${{ github.event.issue.title }}" ) -replace '\s', '_'
           $body_content  = $( "${{ github.event.issue.body }}" ) -replace "`r`n", ' '
           $CommitMessage = ./Bin/New-BranchContent.ps1 -BranchName $branch_name -BodyContent $body_content -verbose
-          git config user.name github-actions
-          git config user.email github-actions@github.com
           git add .
           git commit -m $CommitMessage
 
