@@ -24,7 +24,7 @@ jobs:
           echo $branch_name > BRANCH_NAME
 
       - name: Echo Branch name
-        run: Write-Host BRANCH_Name
+        run: echo BRANCH_NAME
 
       - name: Clone repo ${{ github.repository }}
         uses: actions/checkout@v3
