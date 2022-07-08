@@ -16,37 +16,31 @@ jobs:
       run: 
         shell: pwsh
     env:
-        BRANCH_NAME: $( "${{ github.event.issue.title }}" ) -replace '\s', '_'
+        BRANCH_NAME: ${{ github.event.issue.title }} -replace '\s', '_'
 
     steps:
-      - name: Echo Branch name
-        run: Write-Host "Issue ${{ env.BRANCH_NAME }}"
-
       - name: Clone repo ${{ github.repository }}
         uses: actions/checkout@v3
         with:
           ref: main
 
-      - name: Check out feature branch for issue ${{ github.event.issue.title }}
+      - name: Check out feature branch for issue ${{ env.BRANCH_NAME }}
         run: |
-          $branch_name = $( "${{ github.event.issue.title }}" ) -replace '\s', '_'
           Write-Host "Issue ${{ github.event.issue.title }} created on ${{ github.repository }}"
-          git checkout -b $branch_name
+          git checkout -b ${{ env.BRANCH_NAME }}
           git config user.name github-actions
           git config user.email github-actions@github.com
 
-      - name: Add new file to feature branch
+      - name: Add new file to feature branch ${{ env.BRANCH_NAME }}
         run: |
-          $branch_name   = $( "${{ github.event.issue.title }}" ) -replace '\s', '_'
           $body_content  = $( "${{ github.event.issue.body }}" ) -replace "`r`n", ' '
-          $CommitMessage = ./Bin/New-BranchContent.ps1 -BranchName $branch_name -BodyContent $body_content -verbose
+          $CommitMessage = ./Bin/New-BranchContent.ps1 -BranchName ${{ env.BRANCH_NAME }} -BodyContent $body_content -verbose
           git add .
           git commit -m $CommitMessage
 
-      - name: Push feature branch
+      - name: Push feature branch ${{ env.BRANCH_NAME }}
         run: |
-          $branch_name = $( "${{ github.event.issue.title }}" ) -replace '\s', '_'
-          git push origin $branch_name
+          git push origin ${{ env.BRANCH_NAME }}
 
       - name: Close Issue ${{ github.event.issue.number }} ${{ github.event.issue.title }}
         uses: peter-evans/close-issue@v2
