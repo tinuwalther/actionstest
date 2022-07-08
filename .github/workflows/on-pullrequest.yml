@@ -78,8 +78,16 @@ jobs:
 
       - name: Merge in to main branch
         if: ${{ success() }}
-        run: Write-Host "Automerge  ${{ github.event.pull_request }}"
+        run:  |
+          Write-Host "Automerge  ${{ github.event.pull_request }}"
+          $currentbranch = git branch --show-current
+          Write-Host "Current branch is $currentbranch"
+          $targetbranch = 'test'
+          git pull origin $targetbranch
 
       - name: Delete feature branch
         if: ${{ success() }}
-        run: Write-Host "Autodelete ${{ github.event.pull_request }}"
+        run: |
+          Write-Host "Autodelete ${{ github.event.pull_request }}"
+          git checkout test
+          git branch -D ${{ github.event.pull_request }}
