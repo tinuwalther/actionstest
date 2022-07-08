@@ -12,7 +12,7 @@ param(
     #endregion,
 
     [Parameter(
-        Mandatory=$true,
+        Mandatory=$false,
         ValueFromPipeline=$true,
         ValueFromPipelineByPropertyName=$true,
         Position = 1
@@ -40,7 +40,9 @@ process{
             $CommitMessage = "Add $($BranchName).yml"
         }
         Write-Verbose "[ $(Get-Date -f 'yyyy-MM-dd HH:mm:ss.fff') ] [ Branch  ] $($BranchName)"
-        Add-Content -Path $ExampleYaml "# $($BodyContent)"
+        if(-not([String]::IsNullOrEmpty($BodyContent))){
+            Add-Content -Path $ExampleYaml "# $($BodyContent)"
+        }
         Add-Content -Path $ExampleYaml "- Name:      $($BranchName)"
         Add-Content -Path $ExampleYaml "  IPAddress: 192.x.y.z"
         Add-Content -Path $ExampleYaml "  Subnet:    255.255.255.0"
