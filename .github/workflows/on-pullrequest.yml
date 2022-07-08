@@ -1,16 +1,9 @@
-# This is a basic workflow to help you get started with Actions
 name: Pull request -> run Pester Tests
 
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the main branch
   pull_request:
     branches: [main]
-
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
     
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   trigger_pester:
     runs-on: ubuntu-latest
@@ -19,24 +12,19 @@ jobs:
         shell: pwsh
         
     steps:
-      # Clone repo
-      - name: Clone repo
+      - name: Clone repo ${{ github.repository }}
         uses: actions/checkout@v3
         with:
           ref: ${{ github.event.pull_request.head.sha }}
 
-      # Do magic things and commit
-      - name: Checkout branch ${{ github.event.pull_request.title }}
+      - name: Checkout branch
         run: |
           git checkout -b ${{ github.event.pull_request.title }}
-          git branch
           $currentbranch = git branch --show-current
           Write-Host "Current branch is $currentbranch"
 
-      # Run Pester Tests
       - name: Invoke Pester Tests
         run: |
-          git branch
           Write-Host "Install and import Modules"
           Install-Module -Name psyml -force
           Import-Module -Name Pester -MinimumVersion 5.3.3
@@ -88,12 +76,10 @@ jobs:
           git commit -m $CommitMessage
           git push origin $currentbranch
 
-      # Merge in to main branch
       - name: Merge in to main branch
         if: ${{ success() }}
         run: Write-Host "Automerge  ${{ github.event.pull_request }}"
 
-      # Delete feature branch
       - name: Delete feature branch
         if: ${{ success() }}
         run: Write-Host "Autodelete ${{ github.event.pull_request }}"
