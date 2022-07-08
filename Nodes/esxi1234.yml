@@ -1,0 +1,6 @@
+# This is the first ESXi Host in the environment
+- Name:      esxi1234
+  IPAddress: 192.x.y.z
+  Subnet:    255.255.255.0
+  Gateway:   192.x.y.1
+  Status:    new
