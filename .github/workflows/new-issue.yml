@@ -1,22 +1,16 @@
-# This is a basic workflow to help you get started with Actions
 name: New issue -> checkout feature branch
 
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on issue request events
   issues:
     types:
       - opened
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   new_issue:
     runs-on: ubuntu-latest
     defaults:
       run: 
         shell: pwsh
-    env:
-        BRANCH_NAME: ${{ github.event.issue.title }}
 
     steps:
       - name: Clone repo ${{ github.repository }}
@@ -24,31 +18,23 @@ jobs:
         with:
           ref: main
 
-      - name: Create name for feature branch
-        run: |
-          $branch_name = $( "${{ BRANCH_NAME }}" ) -replace '\s', '_'
-          Write-Host "feature branch $branch_name"
-        env:
-          BRANCH_NAME: $branch_name
-
       - name: Check out feature branch
         run: |
           Write-Host "Issue ${{ github.event.issue.title }} created on ${{ github.repository }}"
-          Write-Host ${{ env.BRANCH_NAME }}
-          git checkout -b ${{ env.BRANCH_NAME }}
+          git checkout -b ${{ github.event.issue.title }}
           git config user.name github-actions
           git config user.email github-actions@github.com
 
       - name: Add new file to feature branch
         run: |
           $body_content  = $( "${{ github.event.issue.body }}" ) -replace "`r`n", ' '
-          $CommitMessage = ./Bin/New-BranchContent.ps1 -BranchName ${{ env.BRANCH_NAME }} -BodyContent $body_content -verbose
+          $CommitMessage = ./Bin/New-BranchContent.ps1 -BranchName ${{ github.event.issue.title }} -BodyContent $body_content -verbose
           git add .
           git commit -m $CommitMessage
 
       - name: Push feature branch
         run: |
-          git push origin ${{ env.BRANCH_NAME }}
+          git push origin ${{ github.event.issue.title }}
 
       - name: Close Issue ${{ github.event.issue.number }} ${{ github.event.issue.title }}
         uses: peter-evans/close-issue@v2
