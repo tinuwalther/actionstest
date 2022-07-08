@@ -19,12 +19,12 @@ jobs:
     steps:
       - name: Define variables
         run: |
-          # Hard coded variable
           $branch_name = $( "${{ github.event.issue.title }}" ) -replace '\s', '_'
-          echo $branch_name > BRANCH_NAME
+          env:
+            BRANCH_NAME: $branch_name
 
       - name: Echo Branch name
-        run: echo BRANCH_NAME
+        run: Write-Host "Issue ${{ env.BRANCH_NAME }}"
 
       - name: Clone repo ${{ github.repository }}
         uses: actions/checkout@v3
