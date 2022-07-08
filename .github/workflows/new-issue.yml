@@ -20,8 +20,8 @@ jobs:
       - name: Define variables
         run: |
           $branch_name = $( "${{ github.event.issue.title }}" ) -replace '\s', '_'
-          env:
-            BRANCH_NAME: $branch_name
+        env:
+          BRANCH_NAME: $branch_name
 
       - name: Echo Branch name
         run: Write-Host "Issue ${{ env.BRANCH_NAME }}"
