@@ -31,21 +31,22 @@ jobs:
         env:
           BRANCH_NAME: $branch_name
 
-      - name: Check out feature branch for issue $branch_name
+      - name: Check out feature branch
         run: |
           Write-Host "Issue ${{ github.event.issue.title }} created on ${{ github.repository }}"
+          Write-Host ${{ env.BRANCH_NAME }}
           git checkout -b ${{ env.BRANCH_NAME }}
           git config user.name github-actions
           git config user.email github-actions@github.com
 
-      - name: Add new file to feature branch ${{ env.BRANCH_NAME }}
+      - name: Add new file to feature branch
         run: |
           $body_content  = $( "${{ github.event.issue.body }}" ) -replace "`r`n", ' '
           $CommitMessage = ./Bin/New-BranchContent.ps1 -BranchName ${{ env.BRANCH_NAME }} -BodyContent $body_content -verbose
           git add .
           git commit -m $CommitMessage
 
-      - name: Push feature branch ${{ env.BRANCH_NAME }}
+      - name: Push feature branch
         run: |
           git push origin ${{ env.BRANCH_NAME }}
 
