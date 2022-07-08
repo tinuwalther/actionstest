@@ -16,7 +16,7 @@ jobs:
       run: 
         shell: pwsh
     env:
-        BRANCH_NAME: ${{ github.event.issue.title }} -replace '\s', '_'
+        BRANCH_NAME: ${{ github.event.issue.title }}
 
     steps:
       - name: Clone repo ${{ github.repository }}
@@ -24,7 +24,14 @@ jobs:
         with:
           ref: main
 
-      - name: Check out feature branch for issue ${{ env.BRANCH_NAME }}
+      - name: Create name for feature branch
+        run: |
+          $branch_name = ${{ env.BRANCH_NAME }} -replace '\s', '_'
+          Write-Host "feature branch $branch_name"
+        env:
+          BRANCH_NAME: $branch_name
+
+      - name: Check out feature branch for issue $branch_name
         run: |
           Write-Host "Issue ${{ github.event.issue.title }} created on ${{ github.repository }}"
           git checkout -b ${{ env.BRANCH_NAME }}
