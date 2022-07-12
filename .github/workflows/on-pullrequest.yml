@@ -85,7 +85,7 @@ jobs:
           git checkout -b deploy
           git pull
           git merge --no-ff $feature_branch -m "Auto-merge $feature_branch to deploy"
-          git push
+          git push --set-upstream origin deploy
 
       - name: Delete feature branch
         if: ${{ success() }}
