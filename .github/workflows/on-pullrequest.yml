@@ -91,7 +91,7 @@ jobs:
         if: ${{ success() }}
         run: |
           $feature_branch = $("${{ github.event.pull_request.title }}").ToLower()
-          if(($feature_branch -notmatch 'main') -or ($feature_branch -notmatch 'test')){
+          if(($feature_branch -notmatch 'main') -or ($feature_branch -notmatch 'test') -or ($feature_branch -notmatch 'deploy')){
             git push --delete origin $feature_branch
           }else{
             Write-Host "$feature_branch is excluded from Autodelete"
