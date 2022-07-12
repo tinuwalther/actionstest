@@ -1,11 +1,11 @@
-name: Pull request -> run Pester Tests
+name: Add computer -> run Pester Tests, upload results and merge to test
 
 on:
   pull_request:
-    branches: [main]
+    branches: [main, test]
     
 jobs:
-  trigger_pester:
+  add-new-computer-to-test:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -19,7 +19,8 @@ jobs:
 
       - name: Checkout branch
         run: |
-          git checkout -b ${{ github.event.pull_request.title }}
+          $feature_branch = $("${{ github.event.pull_request.title }}").ToLower()
+          git checkout -b $feature_branch
           $currentbranch = git branch --show-current
           Write-Host "Current branch is $currentbranch"
 
@@ -76,10 +77,15 @@ jobs:
           git commit -m $CommitMessage
           git push origin $currentbranch
 
-      - name: Merge in to main branch
+      - name: Merge ${{ github.event.pull_request.title }} back to test
         if: ${{ success() }}
         run: |
-          Write-Host "Automerge ${{ github.event.pull_request.title }}"
+          $feature_branch = $("${{ github.event.pull_request.title }}").ToLower()
+          git fetch --unshallow
+          git checkout test
+          git pull
+          git merge --no-ff $feature_branch -m "Auto-merge $feature_branch back to test"
+          git push
 
       - name: Delete feature branch
         if: ${{ success() }}

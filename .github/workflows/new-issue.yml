@@ -1,4 +1,4 @@
-name: New issue -> checkout feature branch
+name: New computer -> checkout feature branch and create computer
 
 on:
   issues:
@@ -6,7 +6,7 @@ on:
       - opened
 
 jobs:
-  new_issue:
+  new-computer-request:
     runs-on: ubuntu-latest
     defaults:
       run: 

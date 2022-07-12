@@ -1,4 +1,4 @@
-name: Trigger Pester Tests -> run Pester Tests and upload results
+name: Trigger Merge -> run Pester Tests, upload results and merge to test
 
 on: 
 #  push:
@@ -14,7 +14,7 @@ on:
         required: true
 
 jobs:
-  trigger_pester:
+  trigger-merge-to-test:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -88,7 +88,7 @@ jobs:
           git fetch --unshallow
           git checkout test
           git pull
-          git merge --no-ff main -m "Auto-merge main back to test"
+          git merge --no-ff ${{ github.event.inputs.name }} -m "Auto-merge ${{ github.event.inputs.name }} back to test"
           git push
 
       - name: Dump GitHub context
