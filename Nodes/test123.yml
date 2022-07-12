@@ -1,6 +1,6 @@
 # This is my first computer
 - Name:      test123
-  IPAddress: 192.x.y.z
+  IPAddress: 192.168.254.11
   Subnet:    255.255.255.0
-  Gateway:   192.x.y.1
+  Gateway:   192.168.254.1
   Status:    new
