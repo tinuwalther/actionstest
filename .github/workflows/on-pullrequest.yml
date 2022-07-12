@@ -1,11 +1,11 @@
-name: Add computer -> run Pester Tests, upload results and merge to test
+name: Add computer -> run Pester Tests, upload results and merge to deploy
 
 on:
   pull_request:
-    branches: [main, test]
+    branches: [main, test, deploy]
     
 jobs:
-  add-new-computer-to-main:
+  add-new-computer-to-deploy:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -77,14 +77,14 @@ jobs:
           git commit -m $CommitMessage
           git push origin $currentbranch
 
-      - name: Merge ${{ github.event.pull_request.title }} back to test
+      - name: Merge ${{ github.event.pull_request.title }} to deploy
         if: ${{ success() }}
         run: |
           $feature_branch = $("${{ github.event.pull_request.title }}").ToLower()
           git fetch --unshallow
-          git checkout test
+          git checkout -b deploy
           git pull
-          git merge --no-ff $feature_branch -m "Auto-merge $feature_branch back to test"
+          git merge --no-ff $feature_branch -m "Auto-merge $feature_branch to deploy"
           git push
 
       - name: Delete feature branch

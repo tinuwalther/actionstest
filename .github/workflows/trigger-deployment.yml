@@ -10,7 +10,7 @@ on:
     inputs:
       name:
         description: 'branch name to checkout'
-        default: 'test'
+        default: 'deploy'
         required: true
 
 jobs:
