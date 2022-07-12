@@ -10,7 +10,7 @@ on:
     inputs:
       name:
         description: 'branch name to checkout'
-        default: ''
+        default: 'test'
         required: true
 
 jobs:
@@ -81,6 +81,14 @@ jobs:
           git commit -m "Upload Last-TestsReport.csv"
           git add README.md
           git commit -m "Update README.md"
+          git push
+
+      - name: Merge ${{ github.event.inputs.name }} back to test
+        run: |
+          git fetch --unshallow
+          git checkout test
+          git pull
+          git merge --no-ff main -m "Auto-merge main back to test"
           git push
 
       - name: Dump GitHub context
