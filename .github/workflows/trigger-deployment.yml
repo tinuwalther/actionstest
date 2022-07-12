@@ -1,25 +1,34 @@
-name: Add computer -> run Pester Tests, upload results and merge to test
+name: Trigger Deployment -> run Pester Tests, upload results and merge to test
 
-on:
-  pull_request:
-    branches: [main, test]
-    
+on: 
+#  push:
+#    branches-ignore:
+#    - 'main'
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'branch name to checkout'
+        default: 'test'
+        required: true
+
 jobs:
-  add-new-computer-to-main:
+  trigger-deployment:
     runs-on: ubuntu-latest
     defaults:
       run:
         shell: pwsh
         
     steps:
-      - name: Clone repo ${{ github.repository }}
+      - name: Clone repo ${{ github.event.inputs.name }}
         uses: actions/checkout@v3
         with:
-          ref: ${{ github.event.pull_request.head.sha }}
+          ref: ${{ github.event.inputs.name }}
 
       - name: Checkout branch
         run: |
-          $feature_branch = $("${{ github.event.pull_request.title }}").ToLower()
+          $feature_branch = $("${{ github.event.inputs.name }}").ToLower()
           git checkout -b $feature_branch
           $currentbranch = git branch --show-current
           Write-Host "Current branch is $currentbranch"
@@ -64,34 +73,37 @@ jobs:
           Write-Host "Update README.md"
           Add-Content -Path $ReadmeFullName -Value "$($result.ExecutedAt)|$($result.Result)|$($result.TotalCount)|$($result.PassedCount)|$($result.FailedCount)|$($result.ErrorCount)|$($result.SkippedCount)|$($result.NotRunCount)"
 
+      - name: Run Deployment
+        run: |
+          Write-Host "Run Deployment and add logfile"
+
       - name: Upload changes
-        if: ${{ always() }}
         run: |
           Write-Host "Upload results"
           git config user.name github-actions
           git config user.email github-actions@github.com
           $currentbranch = git branch --show-current
           Write-Host "Current branch is $currentbranch"
-          $CommitMessage = "Upload Last-TestsReport"
+          $CommitMessage = "Upload last results"
           git add .
           git commit -m $CommitMessage
           git push origin $currentbranch
 
-      - name: Merge ${{ github.event.pull_request.title }} back to test
+      - name: Merge ${{ github.event.inputs.name }} back to main
         if: ${{ success() }}
         run: |
-          $feature_branch = $("${{ github.event.pull_request.title }}").ToLower()
+          $feature_branch = $("${{ github.event.inputs.name }}").ToLower()
           git fetch --unshallow
-          git checkout test
+          git checkout main
           git pull
-          git merge --no-ff $feature_branch -m "Auto-merge $feature_branch back to test"
+          git merge --no-ff $feature_branch -m "Auto-merge $feature_branch back to main"
           git push
 
       - name: Delete feature branch
         if: ${{ success() }}
         run: |
-          $feature_branch = $("${{ github.event.pull_request.title }}").ToLower()
-          if(($feature_branch -notmatch 'main') -or ($feature_branch -notmatch 'test')){
+          $feature_branch = $("${{ github.event.inputs.name }}").ToLower()
+          if($feature_branch -notmatch 'main'){
             git push --delete origin $feature_branch
           }else{
             Write-Host "$feature_branch is excluded from Autodelete"
