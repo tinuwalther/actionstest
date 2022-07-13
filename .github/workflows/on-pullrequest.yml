@@ -86,18 +86,24 @@ jobs:
       - name: Merge feature branch to deploy
         if: ${{ success() }}
         run: |
-          git fetch --unshallow
-          git checkout -b deploy
-          git pull
-          git merge --no-ff ${{ steps.set-var.outputs.feature_branch }} -m "Auto-merge ${{ steps.set-var.outputs.feature_branch }} to deploy"
-          git push --set-upstream origin deploy
+          $feature_branch = "${{ steps.set-var.outputs.feature_branch }}"
+          if($feature_branch -match 'deploy'){
+            Throw "$feature_branch is excluded from Automerge back to deploy"
+          }else{
+            git fetch --unshallow
+            git checkout -b deploy
+            git pull
+            git merge --no-ff ${{ steps.set-var.outputs.feature_branch }} -m "Auto-merge ${{ steps.set-var.outputs.feature_branch }} to deploy"
+            git push --set-upstream origin deploy
+          }
 
       - name: Delete feature branch
         if: ${{ success() }}
         run: |
           $feature_branch = "${{ steps.set-var.outputs.feature_branch }}"
-          if(($feature_branch -notmatch 'main') -or ($feature_branch -notmatch 'test') -or ($feature_branch -notmatch 'deploy')){
-            git push --delete origin $feature_branch
-          }else{
+          if(($feature_branch -match 'main') -or ($feature_branch -match 'test') -or ($feature_branch -match 'deploy')){
             Write-Host "$feature_branch is excluded from Autodelete"
+          }else{
+            Write-Host "Remove $feature_branch"
+            git push --delete origin $feature_branch
           }
