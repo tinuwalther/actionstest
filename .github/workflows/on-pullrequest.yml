@@ -87,8 +87,6 @@ jobs:
         if: ${{ success() }}
         run: |
           $feature_branch = "${{ steps.set-var.outputs.feature_branch }}"
-          git config user.name github-actions
-          git config user.email github-actions@github.com
           git fetch --unshallow
           git checkout main
           git pull
@@ -99,7 +97,7 @@ jobs:
         if: ${{ success() }}
         run: |
           $feature_branch = "${{ steps.set-var.outputs.feature_branch }}"
-          if(($feature_branch -match 'main') -or ($feature_branch -match 'test') -or ($feature_branch -match 'deploy')){
+          if(($feature_branch -match 'main') -or ($feature_branch -match '^test$') -or ($feature_branch -match 'deploy')){
             Write-Host "$feature_branch is excluded from Autodelete"
           }else{
             Write-Host "Remove $feature_branch"
