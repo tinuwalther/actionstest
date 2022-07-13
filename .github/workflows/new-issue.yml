@@ -16,8 +16,7 @@ jobs:
       - name: Set variable
         id: set-var
         run : |
-          $feature_branch = $( "${{ github.event.issue.title }}" ).ToLower()
-          $feature_branch = $feature_branch -replace '\s', ' '
+          $feature_branch = $(( "${{ github.event.issue.title }}" ).ToLower()) -replace '\s', ''
           echo "::set-output name=feature_branch::$feature_branch"
           Write-Host $feature_branch
 
