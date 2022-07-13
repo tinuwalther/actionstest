@@ -13,6 +13,12 @@ jobs:
         shell: pwsh
 
     steps:
+      - name: Set variable
+        id: set-var
+        run : |
+          $feature_branch = $("${{ github.event.issue.title }}").ToLower()
+          echo "::set-output name=feature_branch::$feature_branch"
+
       - name: Clone repo ${{ github.repository }}
         uses: actions/checkout@v3
         with:
@@ -20,6 +26,7 @@ jobs:
 
       - name: Check out feature branch
         run: |
+          Write-Host "${{ steps.set-var.outputs.feature_branch }}" -ForegroundColor Green
           Write-Host "Issue ${{ github.event.issue.title }} created on ${{ github.repository }}"
           git checkout -b ${{ github.event.issue.title }}
           git config user.name github-actions
@@ -27,6 +34,7 @@ jobs:
 
       - name: Add new file to feature branch
         run: |
+          Write-Host "${{ steps.set-var.outputs.feature_branch }}" -ForegroundColor Green
           $body_content  = $( "${{ github.event.issue.body }}" ) -replace "`r`n", ' '
           if([String]::IsNullOrEmpty($body_content)){
             $CommitMessage = ./Bin/New-BranchContent.ps1 -BranchName ${{ github.event.issue.title }} -verbose
@@ -38,6 +46,7 @@ jobs:
 
       - name: Push feature branch
         run: |
+          Write-Host "${{ steps.set-var.outputs.feature_branch }}" -ForegroundColor Green
           git push origin ${{ github.event.issue.title }}
 
       - name: Close Issue ${{ github.event.issue.number }} ${{ github.event.issue.title }}
