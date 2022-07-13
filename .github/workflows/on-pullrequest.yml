@@ -95,7 +95,7 @@ jobs:
       - name: Delete feature branch
         if: ${{ success() }}
         run: |
-          $feature_branch = ${{ steps.set-var.outputs.feature_branch }}
+          $feature_branch = "${{ steps.set-var.outputs.feature_branch }}"
           if(($feature_branch -notmatch 'main') -or ($feature_branch -notmatch 'test') -or ($feature_branch -notmatch 'deploy')){
             git push --delete origin $feature_branch
           }else{
