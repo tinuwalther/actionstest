@@ -36,9 +36,9 @@ jobs:
         run: |
           $body_content = $( "${{ github.event.issue.body }}" ) -replace "`r`n", ' '
           if([String]::IsNullOrEmpty($body_content)){
-            $CommitMessage = ./Bin/New-BranchContent.ps1 -BranchName ${{ steps.set-var.outputs.feature_branch }} -verbose
+            $CommitMessage = ./Bin/New-BranchContent.ps1 -BranchName ${{ steps.set-var.outputs.feature_branch }}
           }else{
-            $CommitMessage = ./Bin/New-BranchContent.ps1 -BranchName ${{ steps.set-var.outputs.feature_branch }} -BodyContent $body_content -verbose
+            $CommitMessage = ./Bin/New-BranchContent.ps1 -BranchName ${{ steps.set-var.outputs.feature_branch }} -BodyContent $body_content
           }
           git add .
           git commit -m $CommitMessage
