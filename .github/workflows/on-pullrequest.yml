@@ -1,4 +1,4 @@
-name: Add computer -> run Pester Tests, upload results and merge to deploy
+name: Add computer -> run Pester Tests, upload results and merge to main
 
 on:
   pull_request:
