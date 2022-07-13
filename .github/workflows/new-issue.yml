@@ -16,7 +16,7 @@ jobs:
       - name: Set variable
         id: set-var
         run : |
-          $feature_branch = $( "${{ github.event.issue.title }}" ).ToLower() -replace "`r`n", ' '
+          $feature_branch = $( "${{ github.event.issue.title }}" ).ToLower() -replace '\s', ' '
           $body_content   = $( "${{ github.event.issue.body }}" ) -replace "`r`n", ' '
           echo "::set-output name=feature_branch::$feature_branch"
           echo "::set-output name=body_content::$body_content"
@@ -35,10 +35,11 @@ jobs:
 
       - name: Add new file to feature branch
         run: |
-          if([String]::IsNullOrEmpty( ${{ steps.set-var.outputs.body_content }} )){
+          $body_content = ${{ steps.set-var.outputs.body_content }}
+          if([String]::IsNullOrEmpty($body_content)){
             $CommitMessage = ./Bin/New-BranchContent.ps1 -BranchName ${{ steps.set-var.outputs.feature_branch }} -verbose
           }else{
-            $CommitMessage = ./Bin/New-BranchContent.ps1 -BranchName ${{ steps.set-var.outputs.feature_branch }} -BodyContent ${{ steps.set-var.outputs.body_content }} -verbose
+            $CommitMessage = ./Bin/New-BranchContent.ps1 -BranchName ${{ steps.set-var.outputs.feature_branch }} -BodyContent $body_content -verbose
           }
           git add .
           git commit -m $CommitMessage
