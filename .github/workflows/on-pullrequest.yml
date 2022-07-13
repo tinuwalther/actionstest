@@ -12,15 +12,21 @@ jobs:
         shell: pwsh
         
     steps:
-      - name: Clone repo ${{ github.repository }}
+      - name: Set variable
+        id: set-var
+        run : |
+          $feature_branch = $(( "${{ github.event.pull_request.title }}" ).ToLower()) -replace '\s', ''
+          echo "::set-output name=feature_branch::$feature_branch"
+          Write-Host "New feature branch: $($feature_branch)"
+
+      - name: Clone repository
         uses: actions/checkout@v3
         with:
           ref: ${{ github.event.pull_request.head.sha }}
 
       - name: Checkout branch
         run: |
-          $feature_branch = $("${{ github.event.pull_request.title }}").ToLower()
-          git checkout -b $feature_branch
+          git checkout -b ${{ steps.set-var.outputs.feature_branch }}
           $currentbranch = git branch --show-current
           Write-Host "Current branch is $currentbranch"
 
@@ -52,7 +58,7 @@ jobs:
           if(-not(Test-Path $ReportsPath)){
             $null = New-Item -Path $ReportsPath -ItemType Directory
           }
-          $NUnitReport | Export-NUnitReport -Path $ReportFullName #Last-TestsReport.NUnitXml
+          $NUnitReport | Export-NUnitReport -Path $ReportFullName
           
           Write-Host "Create CSV-Report"
           if(Test-Path $CsvFullName){
@@ -77,20 +83,19 @@ jobs:
           git commit -m $CommitMessage
           git push origin $currentbranch
 
-      - name: Merge ${{ github.event.pull_request.title }} to deploy
+      - name: Merge feature branch to deploy
         if: ${{ success() }}
         run: |
-          $feature_branch = $("${{ github.event.pull_request.title }}").ToLower()
           git fetch --unshallow
           git checkout -b deploy
           git pull
-          git merge --no-ff $feature_branch -m "Auto-merge $feature_branch to deploy"
+          git merge --no-ff ${{ steps.set-var.outputs.feature_branch }} -m "Auto-merge ${{ steps.set-var.outputs.feature_branch }} to deploy"
           git push --set-upstream origin deploy
 
       - name: Delete feature branch
         if: ${{ success() }}
         run: |
-          $feature_branch = $("${{ github.event.pull_request.title }}").ToLower()
+          $feature_branch = ${{ steps.set-var.outputs.feature_branch }}
           if(($feature_branch -notmatch 'main') -or ($feature_branch -notmatch 'test') -or ($feature_branch -notmatch 'deploy')){
             git push --delete origin $feature_branch
           }else{

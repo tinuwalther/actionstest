@@ -21,7 +21,14 @@ jobs:
         shell: pwsh
         
     steps:
-      - name: Clone repo ${{ github.event.inputs.name }}
+      - name: Set variable
+        id: set-var
+        run : |
+          $feature_branch = $(( "${{ github.event.pull_request.title }}" ).ToLower()) -replace '\s', ''
+          echo "::set-output name=feature_branch::$feature_branch"
+          Write-Host "New feature branch: $($feature_branch)"
+
+      - name: Clone repository
         uses: actions/checkout@v3
         with:
           ref: ${{ github.event.inputs.name }}
@@ -83,7 +90,7 @@ jobs:
           git commit -m "Update README.md"
           git push
 
-      - name: Merge ${{ github.event.inputs.name }} back to test
+      - name: Merge feature branch back to test
         run: |
           git fetch --unshallow
           git checkout test

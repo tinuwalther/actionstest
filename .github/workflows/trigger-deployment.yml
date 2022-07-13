@@ -21,15 +21,21 @@ jobs:
         shell: pwsh
         
     steps:
-      - name: Clone repo ${{ github.event.inputs.name }}
+      - name: Set variable
+        id: set-var
+        run : |
+          $feature_branch = $(( "${{ github.event.pull_request.title }}" ).ToLower()) -replace '\s', ''
+          echo "::set-output name=feature_branch::$feature_branch"
+          Write-Host "New feature branch: $($feature_branch)"
+
+      - name: Clone repository
         uses: actions/checkout@v3
         with:
           ref: ${{ github.event.inputs.name }}
 
       - name: Checkout branch
         run: |
-          $feature_branch = $("${{ github.event.inputs.name }}").ToLower()
-          git checkout -b $feature_branch
+          git checkout -b ${{ steps.set-var.outputs.feature_branch }}
           $currentbranch = git branch --show-current
           Write-Host "Current branch is $currentbranch"
 
@@ -89,20 +95,19 @@ jobs:
           git commit -m $CommitMessage
           git push origin $currentbranch
 
-      - name: Merge ${{ github.event.inputs.name }} back to main
+      - name: Merge feature branch back to main
         if: ${{ success() }}
         run: |
-          $feature_branch = $("${{ github.event.inputs.name }}").ToLower()
           git fetch --unshallow
           git checkout main
           git pull
-          git merge --no-ff $feature_branch -m "Auto-merge $feature_branch back to main"
+          git merge --no-ff ${{ steps.set-var.outputs.feature_branch }} -m "Auto-merge ${{ steps.set-var.outputs.feature_branch }} back to main"
           git push
 
       - name: Delete feature branch
         if: ${{ success() }}
         run: |
-          $feature_branch = $("${{ github.event.inputs.name }}").ToLower()
+          $feature_branch = ${{ steps.set-var.outputs.feature_branch }}
           if($feature_branch -notmatch 'main'){
             git push --delete origin $feature_branch
           }else{
