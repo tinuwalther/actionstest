@@ -16,10 +16,10 @@ jobs:
       - name: Set variable
         id: set-var
         run : |
-          $feature_branch = $(( "${{ github.event.issue.title }}" ).ToLower()) -replace '\s', ' '
-          $body_content   = $( "${{ github.event.issue.body }}" ) -replace "`r`n", ' '
+          $feature_branch = $( "${{ github.event.issue.title }}" ).ToLower()
+          $feature_branch = $feature_branch -replace '\s', ' '
           echo "::set-output name=feature_branch::$feature_branch"
-          echo "::set-output name=body_content::$body_content"
+          Write-Host $feature_branch
 
       - name: Clone repo ${{ github.repository }}
         uses: actions/checkout@v3
@@ -35,7 +35,7 @@ jobs:
 
       - name: Add new file to feature branch
         run: |
-          $body_content = ${{ steps.set-var.outputs.body_content }}
+          $body_content = $( "${{ github.event.issue.body }}" ) -replace "`r`n", ' '
           if([String]::IsNullOrEmpty($body_content)){
             $CommitMessage = ./Bin/New-BranchContent.ps1 -BranchName ${{ steps.set-var.outputs.feature_branch }} -verbose
           }else{
