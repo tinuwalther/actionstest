@@ -93,7 +93,7 @@ jobs:
           git checkout main
           git pull
           git merge --no-ff ${{ steps.set-var.outputs.feature_branch }} -m "Auto-merge ${{ steps.set-var.outputs.feature_branch }} to main"
-          git push main
+          git push origin main
 
       - name: Delete feature branch
         if: ${{ success() }}
