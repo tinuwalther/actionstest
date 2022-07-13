@@ -1,5 +1,0 @@
-- Name:      test123
-  IPAddress: 192.1.2.3
-  Subnet:    255.255.255.0
-  Gateway:   192.1.2.1
-  Status:    new
