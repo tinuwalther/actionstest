@@ -83,19 +83,15 @@ jobs:
           git commit -m $CommitMessage
           git push origin $currentbranch
 
-      - name: Merge feature branch to deploy
+      - name: Merge feature branch to main
         if: ${{ success() }}
         run: |
           $feature_branch = "${{ steps.set-var.outputs.feature_branch }}"
-          if($feature_branch -match 'deploy'){
-            Throw "$feature_branch is excluded from Automerge back to deploy"
-          }else{
-            git fetch --unshallow
-            git checkout -b deploy
-            git pull
-            git merge --no-ff ${{ steps.set-var.outputs.feature_branch }} -m "Auto-merge ${{ steps.set-var.outputs.feature_branch }} to deploy"
-            git push --set-upstream origin deploy
-          }
+          git fetch --unshallow
+          git checkout main
+          git pull
+          git merge --no-ff ${{ steps.set-var.outputs.feature_branch }} -m "Auto-merge ${{ steps.set-var.outputs.feature_branch }} to main"
+          git push -main
 
       - name: Delete feature branch
         if: ${{ success() }}
