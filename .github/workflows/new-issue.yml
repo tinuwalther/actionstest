@@ -16,8 +16,10 @@ jobs:
       - name: Set variable
         id: set-var
         run : |
-          $feature_branch = $("${{ github.event.issue.title }}").ToLower()
+          $feature_branch = $( "${{ github.event.issue.title }}" ).ToLower() -replace "`r`n", ' '
+          $body_content   = $( "${{ github.event.issue.body }}" ) -replace "`r`n", ' '
           echo "::set-output name=feature_branch::$feature_branch"
+          echo "::set-output name=body_content::$body_content"
 
       - name: Clone repo ${{ github.repository }}
         uses: actions/checkout@v3
@@ -26,31 +28,27 @@ jobs:
 
       - name: Check out feature branch
         run: |
-          Write-Host "${{ steps.set-var.outputs.feature_branch }}" -ForegroundColor Green
-          Write-Host "Issue ${{ github.event.issue.title }} created on ${{ github.repository }}"
-          git checkout -b ${{ github.event.issue.title }}
+          Write-Host "Issue ${{ steps.set-var.outputs.feature_branch }} created on ${{ github.repository }}"
+          git checkout -b ${{ steps.set-var.outputs.feature_branch }}
           git config user.name github-actions
           git config user.email github-actions@github.com
 
       - name: Add new file to feature branch
         run: |
-          Write-Host "${{ steps.set-var.outputs.feature_branch }}" -ForegroundColor Green
-          $body_content  = $( "${{ github.event.issue.body }}" ) -replace "`r`n", ' '
-          if([String]::IsNullOrEmpty($body_content)){
-            $CommitMessage = ./Bin/New-BranchContent.ps1 -BranchName ${{ github.event.issue.title }} -verbose
+          if([String]::IsNullOrEmpty( ${{ steps.set-var.outputs.body_content }} )){
+            $CommitMessage = ./Bin/New-BranchContent.ps1 -BranchName ${{ steps.set-var.outputs.feature_branch }} -verbose
           }else{
-            $CommitMessage = ./Bin/New-BranchContent.ps1 -BranchName ${{ github.event.issue.title }} -BodyContent $body_content -verbose
+            $CommitMessage = ./Bin/New-BranchContent.ps1 -BranchName ${{ steps.set-var.outputs.feature_branch }} -BodyContent ${{ steps.set-var.outputs.body_content }} -verbose
           }
           git add .
           git commit -m $CommitMessage
 
       - name: Push feature branch
         run: |
-          Write-Host "${{ steps.set-var.outputs.feature_branch }}" -ForegroundColor Green
-          git push origin ${{ github.event.issue.title }}
+          git push origin ${{ steps.set-var.outputs.feature_branch }}
 
-      - name: Close Issue ${{ github.event.issue.number }} ${{ github.event.issue.title }}
+      - name: Close Issue ${{ github.event.issue.number }} ${{ steps.set-var.outputs.feature_branch }}
         uses: peter-evans/close-issue@v2
         with:
           issue-number: ${{ github.event.issue.number }}
-          comment: Auto-closing issue, branch ${{ github.event.issue.title }} created successfully
+          comment: Auto-closing issue, branch ${{ steps.set-var.outputs.feature_branch }} created successfully
